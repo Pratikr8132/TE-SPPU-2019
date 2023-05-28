@@ -1,0 +1,76 @@
+
+
+
+public class StringReverse {
+    
+    public static String reverseString(String input) {
+        String reversedString = '';
+        for(Integer i = input.length() - 1; i >= 0; i--) {
+            reversedString += input.substring(i, i+1);
+        }
+        return reversedString;
+    }
+}
+
+
+
+
+
+
+Calculator :
+
+public class CalculatorEx {
+	 public static void calculate(Integer num1, Integer num2) {
+        Integer sum = num1 + num2;
+        Integer difference = num1 - num2;
+        Integer product = num1 * num2;
+        Decimal quotient = num1 / (Decimal)num2;
+
+        System.debug('Sum: ' + sum);
+        System.debug('Difference: ' + difference);
+        System.debug('Product: ' + product);
+        System.debug('Quotient: ' + quotient);
+    }
+}
+
+
+
+
+
+
+
+
+Temperature converter
+
+public class tempConvetApp {
+    public static void convertCelsiusToFahrenheit(Decimal celsius) {
+        Decimal fahrenheit = (celsius * 9 / 5) + 32;
+        System.debug('Celsius: ' + celsius + ' | Fahrenheit: ' + fahrenheit);
+    }}
+
+
+
+
+
+
+
+
+
+
+palindrom checking
+
+public class PalindromeCheck {
+    public static void checkPalindrome(String input) {
+         String reversedString = '';
+        for(Integer i = input.length() - 1; i >= 0; i--) {
+            reversedString += input.substring(i, i+1);
+        }
+      
+              if (input.equalsIgnoreCase(reversedString)) {
+            System.debug(input + ' is a palindrome.');
+        } else {
+            System.debug(input+ ' is not a palindrome.');
+        }
+    }
+  
+    }
