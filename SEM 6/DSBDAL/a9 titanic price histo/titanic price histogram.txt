@@ -1,0 +1,4 @@
+9. Data Visualization
+1.	Use the inbuilt dataset 'titanic'. The dataset contains 891 rows and contains information about the passengers who boarded the unfortunate Titanic ship. Use the Seaborn library to see if we can find any patterns in thedata.
+2.	Writeacodetocheckhowthepriceoftheticket(columnname:'fare')foreach
+passenger is distributed by plotting a histogram.

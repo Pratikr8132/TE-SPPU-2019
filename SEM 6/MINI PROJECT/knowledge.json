@@ -1,0 +1,79 @@
+{'_id': ObjectId('6460f4b8f4ac4536be7416bd'), 'antecedents': "['database', 'SQL']", 'conclusion': 'Structured Query Language (SQL) is used to manage databases'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416bf'), 'antecedents': "['computer', 'memory']", 'conclusion': 'Random Access Memory (RAM) is used to store data temporarily'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416cf'), 'antecedents': '["social media", "Twitter"]', 'conclusion': 'Twitter is a social media platform used to share short messages'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c7'), 'antecedents': "['finance', 'budgeting']", 'conclusion': 'Budgeting is an important skill for managing personal finances.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416da'), 'antecedents': '["city", "Paris"]', 'conclusion': 'Paris is the capital city of France, known for its art, culture, and cuisine'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f8'), 'antecedents': "['programming', 'JavaScript', 'language']", 'conclusion': 'JavaScript is a high-level programming language used primarily for creating dynamic and interactive web pages.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416fa'), 'antecedents': "['web', 'server', 'Nginx']", 'conclusion': 'Nginx is a free and open-source web server software.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c2'), 'antecedents': "['network', 'IP address']", 'conclusion': 'An IP address is a unique identifier assigned to devices on a network'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ce'), 'antecedents': '["mobile phone", "Apple"]', 'conclusion': 'Apple is a technology company that produces the iPhone'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d5'), 'antecedents': '["book", "To Kill a Mockingbird"]', 'conclusion': 'To Kill a Mockingbird is a novel written by Harper Lee'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d6'), 'antecedents': '["animal", "panda"]', 'conclusion': 'Pandas are a species of bear native to China'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d7'), 'antecedents': '["video game", "Minecraft"]', 'conclusion': 'Minecraft is a popular sandbox video game that allows players to build and explore virtual worlds'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d9'), 'antecedents': '["celebrity", "Beyonce"]', 'conclusion': 'Beyonce is an American singer, songwriter, and actress'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e3'), 'antecedents': '["restaurant", "McDonald\'s"]', 'conclusion': "McDonald's is a fast food restaurant chain known for its burgers and fries"}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f1'), 'antecedents': "['database', 'MySQL', 'server']", 'conclusion': 'MySQL is an open-source relational database management system (RDBMS) developed by Oracle.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ff'), 'antecedents': "['web', 'server', 'IIS']", 'conclusion': 'Internet Information Services (IIS) is a web server software created by Microsoft.'}
+{'_id': ObjectId('6460f4b8f4ac4536be741700'), 'antecedents': "['database', 'PostgreSQL', 'server']", 'conclusion': 'PostgreSQL is an open-source relational database management system (RDBMS).'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d4'), 'antecedents': '["movie", "The Godfather"]', 'conclusion': 'The Godfather is a classic American crime film directed by Francis Ford Coppola'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416df'), 'antecedents': '["color", "blue"]', 'conclusion': 'Blue is a primary color often associated with calmness and tranquility'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e7'), 'antecedents': '["TV show", "Breaking Bad"]', 'conclusion': 'Breaking Bad is a popular American television drama series about a high school chemistry teacher turned drug dealer'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f4'), 'antecedents': "['computer', 'memory', 'RAM']", 'conclusion': 'Random Access Memory (RAM) is a type of computer memory that can be accessed randomly.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c1'), 'antecedents': "['operating system', 'Linux']", 'conclusion': 'Linux is an open source operating system'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c4'), 'antecedents': "['programming', 'Python']", 'conclusion': 'Python is a popular programming language known for its simplicity and readability'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c9'), 'antecedents': "['technology', 'artificial intelligence']", 'conclusion': 'Artificial intelligence has the potential to revolutionize various industries.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d8'), 'antecedents': '["fruit", "banana"]', 'conclusion': 'Bananas are a common fruit known for their high potassium content'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e0'), 'antecedents': '["vehicle", "bicycle"]', 'conclusion': 'A bicycle is a human-powered vehicle with two wheels'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e5'), 'antecedents': '["book", "1984"]', 'conclusion': '1984 is a dystopian novel written by George Orwell'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e9'), 'antecedents': '["sport", "soccer"]', 'conclusion': 'Soccer, also known as football, is a popular sport played worldwide'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f7'), 'antecedents': "['operating', 'system', 'macOS']", 'conclusion': 'macOS is an operating system developed by Apple Inc. for its Macintosh line of computers.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f9'), 'antecedents': "['computer', 'security', 'phishing']", 'conclusion': 'Phishing is a cybercrime where attackers use email or social engineering to trick people into providing sensitive information.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b5'), 'antecedents': "['Rathod']", 'conclusion': 'Surname of Pratik'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b9'), 'antecedents': "['file', 'digital']", 'conclusion': 'The file is a digital object'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416bc'), 'antecedents': "['book', 'physical', 'reading material']", 'conclusion': 'The book is a physical object used for reading'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c3'), 'antecedents': "['encryption', 'AES']", 'conclusion': 'Advanced Encryption Standard (AES) is a widely-used encryption algorithm'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416bb'), 'antecedents': "['forgot']", 'conclusion': 'reset'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416cb'), 'antecedents': "['medicine', 'vaccines']", 'conclusion': 'Vaccines are an effective way to prevent the spread of infectious diseases.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ed'), 'antecedents': '["musician", "Beethoven"]', 'conclusion': 'Beethoven was a German composer and pianist known for his classical music'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f3'), 'antecedents': "['programming', 'C', 'language']", 'conclusion': 'C is a general-purpose programming language developed by Bell Labs.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b6'), 'antecedents': "['Vaishnavi','Nevkar']", 'conclusion': 'Founder of this code'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ba'), 'antecedents': "['user', 'lost', 'password']", 'conclusion': 'forgot the password'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d2'), 'antecedents': '["language", "Spanish"]', 'conclusion': 'Spanish is a Romance language spoken by over 500 million people worldwide'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416fb'), 'antecedents': "['database', 'MongoDB', 'server']", 'conclusion': 'MongoDB is a cross-platform document-oriented NoSQL database program.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c5'), 'antecedents': "['food', 'nutrition']", 'conclusion': 'A balanced diet is essential for good health.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ef'), 'antecedents': "['computer', 'security', 'virus']", 'conclusion': 'A computer virus is a type of malicious software (malware) that can replicate itself and spread from one computer to another.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f2'), 'antecedents': "['operating', 'system', 'Linux']", 'conclusion': 'Linux is a free and open-source operating system based on the Unix operating system.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416fe'), 'antecedents': "['computer', 'security', 'malware']", 'conclusion': 'Malware is a type of software designed to harm or exploit any programmable device, service, or network.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416dc'), 'antecedents': '["beverage", "coffee"]', 'conclusion': 'Coffee is a brewed beverage made from roasted coffee beans'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f0'), 'antecedents': "['web', 'browser', 'Chrome']", 'conclusion': 'Google Chrome is a popular web browser developed by Google.'}
+{'_id': ObjectId('6460f4b8f4ac4536be741701'), 'antecedents': "['operating', 'system', 'iOS']", 'conclusion': 'iOS is a mobile operating system created and developed by Apple Inc'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b7'), 'antecedents': "['Pratik', 'Rathod']", 'conclusion': 'Founder of this code'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b3'), 'antecedents': "['AI']", 'conclusion': 'It is called as Artificial Intelligence'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d1'), 'antecedents': '["music", "Jazz"]', 'conclusion': 'Jazz is a genre of music characterized by improvisation and swing rhythms'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b8'), 'antecedents': "['document', 'paper']", 'conclusion': 'The document is a physical object'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ca'), 'antecedents': "['education', 'online learning']", 'conclusion': 'Online learning is a flexible and accessible way to obtain education.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d3'), 'antecedents': '["sport", "tennis"]', 'conclusion': 'Tennis is a racket sport played between two or four players'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e4'), 'antecedents': '["season", "summer"]', 'conclusion': 'Summer is the warmest season of the year, typically from June to August in the Northern Hemisphere'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f5'), 'antecedents': "['web', 'server', 'Apache']", 'conclusion': 'Apache HTTP Server is a free and open-source web server software.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416be'), 'antecedents': "['web', 'HTML']", 'conclusion': 'Hypertext Markup Language (HTML) is used to create web pages'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c0'), 'antecedents': "['software', 'open source']", 'conclusion': 'Open source software is licensed in a way that allows users to use, study, and modify it'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c6'), 'antecedents': "['exercise', 'fitness']", 'conclusion': 'Regular exercise can improve cardiovascular health and overall fitness.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416eb'), 'antecedents': '["animal", "penguin"]', 'conclusion': 'Penguins are a group of flightless birds found in the Southern Hemisphere'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416b4'), 'antecedents': "['Nevkar']", 'conclusion': 'Surname of Vaishnavi'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416dd'), 'antecedents': '["holiday", "Christmas"]', 'conclusion': 'Christmas is a holiday celebrated on December 25th in many countries around the world'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e1'), 'antecedents': '["planet", "Mars"]', 'conclusion': 'Mars is the fourth planet from the sun and is known for its red color'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e2'), 'antecedents': '["board game", "Monopoly"]', 'conclusion': 'Monopoly is a board game where players buy and sell properties to become the richest player'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416fd'), 'antecedents': "['programming', 'Python', 'language']", 'conclusion': 'Python is a high-level programming language known for its readability and simplicity.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416cd'), 'antecedents': '["car", "Tesla"]', 'conclusion': 'Tesla is an American electric vehicle and clean energy company'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416de'), 'antecedents': '["social media", "Facebook"]', 'conclusion': 'Facebook is a social networking site used to connect with friends and family'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e8'), 'antecedents': '["language", "Mandarin"]', 'conclusion': 'Mandarin is the most widely spoken language in the world'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ea'), 'antecedents': '["brand", "Adidas"]', 'conclusion': 'Adidas is a multinational corporation that designs and sells athletic footwear and apparel'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416f6'), 'antecedents': "['database', 'Oracle', 'server']", 'conclusion': 'Oracle Database is a relational database management system (RDBMS) developed by Oracle.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416cc'), 'antecedents': "['travel', 'sustainability']", 'conclusion': 'Sustainable tourism practices can help reduce the negative impact of travel on the environment.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416d0'), 'antecedents': '["food", "sushi"]', 'conclusion': 'Sushi is a Japanese dish made with vinegar rice and seafood or vegetables'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416db'), 'antecedents': '["brand", "Nike"]', 'conclusion': 'Nike is a multinational corporation that designs and sells athletic footwear and apparel'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416fc'), 'antecedents': "['operating', 'system', 'Unix']", 'conclusion': 'Unix is a family of multitasking, multiuser computer operating systems.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416c8'), 'antecedents': "['environment', 'climate change']", 'conclusion': 'Climate change is a pressing environmental issue that requires immediate action.'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416e6'), 'antecedents': '["fruit", "strawberry"]', 'conclusion': 'Strawberries are a sweet and juicy fruit often used in desserts and smoothies'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ec'), 'antecedents': '["country", "Japan"]', 'conclusion': 'Japan is an island country in East Asia known for its technology, food, and culture'}
+{'_id': ObjectId('6460f4b8f4ac4536be7416ee'), 'antecedents': '["color", "green"]', 'conclusion': 'Green'}
