@@ -1,0 +1,38 @@
+create table inactive_mstr(
+    acc_no int primary key,
+    status varchar(30));
+
+insert into inactive_mstr values(101, 'active');
+insert into inactive_mstr values(102, 'inactive');
+insert into inactive_mstr values(103, 'inactive');
+insert into inactive_mstr values(104, 'active');
+insert into inactive_mstr values(105, 'inactive');
+
+
+
+create table new_active(
+    acc_no int primary key,
+    new_status varchar(30));
+
+delimiter $
+create procedure activate()
+begin
+declare accno int;
+declare status2 varchar(30);
+declare exitcondition boolean;
+declare cur1 CURSOR for select acc_no, status from inactive_mstr;
+declare continue handler for not found set exitcondition = TRUE;
+open cur1;
+L1: LOOP
+fetch cur1 into accno, status2;
+if status2 = 'inactive' then
+insert into new_active values(accno, status2);
+end if;
+update new_active set new_status = 'active';
+if exitcondition then
+leave L1;
+end if;
+end LOOP;
+close cur1;
+end;
+$

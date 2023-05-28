@@ -1,0 +1,4 @@
+function map() {emit(this.gender,this.hobby)
+  functiom reduce (key,value){return value.join()}
+  db.maptests.mapreduce(map,reduce{out:(inline:1}});
+  

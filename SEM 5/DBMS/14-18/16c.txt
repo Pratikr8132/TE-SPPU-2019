@@ -1,0 +1,37 @@
+
+create table stud21(
+    roll int primary key,
+    att int,
+    status varchar(2));
+
+insert into stud21 values(1, 67,NULL);
+insert into stud21 values(2, 80,NULL);
+insert into stud21 values(3, 99,NULL);
+insert into stud21 values(4, 50,NULL);
+
+
+create table d_stud(
+    roll int primary key,
+    new_status varchar(2));
+
+
+delimiter $
+create procedure attendance()
+begin
+declare roll_no int;
+declare stat varchar(2);
+declare exitcondition boolean;
+declare cur1 cursor for select roll, status from stud21 where att<75;
+declare continue handler for not found set exitcondition = true;
+open cur1;
+L1 : loop
+fetch cur1 into roll_no, stat;
+insert into d_stud values(roll_no, stat);
+update d_stud set new_status = 'D';
+if exitcondition then
+close cur1;
+leave L1;
+end if;
+end loop L1;
+end;
+$

@@ -1,0 +1,64 @@
+mysql> use bank_db;
+Database changed
+mysql> create table account_master(ID int primary key,Current_balance int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into account_master values(1,10000),(2,5000),(3,60000);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> delimiter $
+mysql> create procedure withdraw(in acc_id int,in amt int)
+     begin
+     declare bal int;
+     declare sp condition for sqlstate '45000';
+     select Current_balance into bal from account_master where ID=acc_id;
+     if bal<amt then
+     signal sqlstate '45000'
+     set message_text='NotEnoughBalance';
+     else
+     set bal = bal-amt;
+     update account_master set Current_balance=bal where ID=acc_id;
+     end if;
+     end;
+     $
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create procedure deposit(in acc_id int,in amt int)
+     begin
+     declare bal int;
+     select current_balance into bal from account_master where ID=acc_id;
+     update account_master set current_balance=bal+amt where ID=acc_id;
+     end;
+     $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call withdraw(1, 5000);
+    -> $
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from account_master;
+    -> $
++----+-----------------+
+| ID | Current_balance |
++----+-----------------+
+|  1 |            5000 |
+|  2 |            5000 |
+|  3 |           60000 |
++----+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> call deposit(2, 5000);
+    -> $
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from account_master;
+    -> $
++----+-----------------+
+| ID | Current_balance |
++----+-----------------+
+|  1 |            5000 |
+|  2 |           10000 |
+|  3 |           60000 |
++----+-----------------+
+3 rows in set (0.00 sec)

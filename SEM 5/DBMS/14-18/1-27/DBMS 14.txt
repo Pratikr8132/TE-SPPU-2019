@@ -1,0 +1,64 @@
+mysql> use assign2;
+Database changed
+mysql> create table stud(RollNo int primary key, attendance int,status varchar(5));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into stud(RollNo,attendance) values(1,150),(2,200),(3,80),(4,70),(5,180);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from stud;
++--------+------------+--------+
+| RollNo | attendance | status |
++--------+------------+--------+
+|      1 |        150 | NULL   |
+|      2 |        200 | NULL   |
+|      3 |         80 | NULL   |
+|      4 |         70 | NULL   |
+|      5 |        180 | NULL   |
++--------+------------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> delimiter $
+mysql> create procedure check_att(in roll int)
+    -> begin
+    -> declare att int;
+    -> declare total int;
+    -> declare exit handler for not found select 'Data not found!!!' message;
+    -> set total=200;
+    -> select attendance into att from stud where RollNo=roll;
+    -> if ((att/total)*100)>=75 then
+    -> update stud set status='ND' where RollNo=roll;
+    -> select 'Term Granted' Message;
+    -> else
+    -> update stud set status='D' where RollNo=roll;
+    -> select 'Term Not Granted' Message;
+    -> end if;
+    -> end;
+    -> $
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call check_att(1);
+    -> $
++--------------+
+| Message      |
++--------------+
+| Term Granted |
++--------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select*from stud;
+    -> $
++--------+------------+--------+
+| RollNo | attendance | status |
++--------+------------+--------+
+|      1 |        150 | ND     |
+|      2 |        200 | NULL   |
+|      3 |         80 | NULL   |
+|      4 |         70 | NULL   |
+|      5 |        180 | NULL   |
++--------+------------+--------+
+5 rows in set (0.00 sec)

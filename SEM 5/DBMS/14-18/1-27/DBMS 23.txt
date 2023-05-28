@@ -1,0 +1,45 @@
+23 mongodb
+
+db.city.insertOne({city:'LA',state:'california',population:5000,location:'hollywood'});
+
+ db.city.insertOne({city:'Timkeen',state:'KS',population:1200,location:'atlantis'});
+
+ db.city.insertOne({city:'Timkeen',state:'KS',population:1000,location:'hillwood'});
+
+db.city.insertOne({city:'las vegas',state:'nevada',population:4900,location:'las vegas'});
+
+db.city.insertOne({city:'columbus',state:'georgia',population:3800,location:'atlanta'});
+
+db.city.insertOne({city:'atlanta',state:'georgia',population:3200,location:'atlanta'});
+
+db.city.updateOne({city:'atlanta'},{$set :{city:['atlanta','athens','savannah','columbus','milton']}});
+
+db.city.updateOne({city:'LA'},{$set :{city:['LA','SAn Francisco','Okaland','San Bruno','Santa Monica']}});
+
+
+ db.city.find();
+
+
+db.city.createIndex({city:1});
+
+db.city.find({city:'atlanta'}).explain("executionStats");
+
+
+db.city.createIndex({'location':-1,population:1});
+
+db.city.find({location:'atlanta',population:{$gt:3000}}).explain("executionStats");
+
+db.city.createIndex({'city.LA':1});
+
+db.city.find({city:'LA'});
+
+db.city.find({city:'LA'}).explain("executionStats");
+
+ db.city.find({population : {$gt : 1600}}, {city:1});
+ 
+ db.city.find({'population' : {$gt : 1600}}, {'city':1});
+
+db.city.find({'state' : 'KS'}, {'city':1});
+
+db.city.find({city : 'Timkeen'}, {location:1});
+

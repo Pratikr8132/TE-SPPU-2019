@@ -1,0 +1,163 @@
+
+
+**************************practicle no7 ans.*******************************
+
+mysql> create database ex7;
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> use ex7;
+Database changed
+mysql> create table project(id varchar(15),pname varchar(15),chief_arch varchar(15));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into project values('c352','database','abc');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into project values('c353','database','def');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into project values('c354','network','ghi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into project values('c453','soacial','pqr');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into project values('c454','developement','xyz');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create tabel employee(empid int primary key,empname varchar(15));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel employee(empid int primary key,empname varchar(15))' at line 1
+mysql> create table employee(empid int primary key,empname varchar(15));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into employee values(101,'sunil');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(102,'anil');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(103,'shekar');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(104,'suresh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(105,'mahesh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(106,'vishal');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table assigned_to(id varchar(15),empid int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into assigned_to values('c352',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c353',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c353',102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c354',102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c354',103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c453',104);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assigned_to values('c454',104);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from project;
++------+--------------+------------+
+| id   | pname        | chief_arch |
++------+--------------+------------+
+| c352 | database     | abc        |
+| c353 | database     | def        |
+| c354 | network      | ghi        |
+| c453 | soacial      | pqr        |
+| c454 | developement | xyz        |
++------+--------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-------+---------+
+| empid | empname |
++-------+---------+
+|   101 | sunil   |
+|   102 | anil    |
+|   103 | shekar  |
+|   104 | suresh  |
+|   105 | mahesh  |
+|   106 | vishal  |
++-------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from assigned_to;
++------+-------+
+| id   | empid |
++------+-------+
+| c352 |   101 |
+| c353 |   101 |
+| c353 |   102 |
+| c354 |   102 |
+| c354 |   103 |
+| c453 |   104 |
+| c454 |   104 |
++------+-------+
+7 rows in set (0.00 sec)
+
+ 
+mysql> select employee.empid,employee.empname from employee,assigned_to where employee.empid=assigned_to.empid and assigned_to.id='c353';
++-------+---------+
+| empid | empname |
++-------+---------+
+|   101 | sunil   |
+|   102 | anil    |
++-------+---------+
+2 rows in set (0.00 sec)
+
+
+mysql> select employee.empid from employee,assigned_to where employee.empid=assigned_to.empid and assigned_to.id='c353';
++-------+
+| empid |
++-------+
+|   101 |
+|   102 |
++-------+
+2 rows in set (0.00 sec)
+
+
+mysql> select employee.empid,employee.empname from employee,assigned_to where employee.empid=assigned_to.empid and assigned_to.id='c353'or assigned_to.id='c354';
++-------+---------+
+| empid | empname |
++-------+---------+
+|   101 | sunil   |
+|   101 | sunil   |
+|   101 | sunil   |
+|   102 | anil    |
+|   102 | anil    |
+|   102 | anil    |
+|   103 | shekar  |
+|   103 | shekar  |
+|   104 | suresh  |
+|   104 | suresh  |
+|   105 | mahesh  |
+|   105 | mahesh  |
+|   106 | vishal  |
+|   106 | vishal  |
++-------+---------+
+14 rows in set (0.00 sec)
+
+mysql> select count(empid) from assigned_to,project where project.id=assigned_to.id and project.pname<>'c453';
++--------------+
+| count(empid) |
++--------------+
+|            7 |
++--------------+
+1 row in set (0.00 sec)

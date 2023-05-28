@@ -1,0 +1,38 @@
+18b:
+
+create table emp(eno int,ename varchar(10),salary int);
+insert into emp values(101,'qqq',10000);
+insert into emp values(102,'aaa',16000);
+insert into emp values(103,'zzz',15000);
+insert into emp values(104,'www',20000);
+insert into emp values(105,'sss',30000);
+
+create table tracking(eno int, salary int);
+
+delimiter $
+create trigger after_insert
+after insert
+on emp
+for each row
+begin
+if(new.salary<50000) then
+signal sqlstate '45000' set message_text='Rejected!!!';
+end if;
+insert into tracking
+set eno=new.eno,
+salary=new.salary;
+end
+$ 
+
+
+delimiter ;
+
+
+update emp set salary =60000 where eno =101;
+update emp set salary =40000 where eno =103;
+
+insert into emp values(304,'rtq',9000);
+
+select * from emp;
+
+select * from tracking;

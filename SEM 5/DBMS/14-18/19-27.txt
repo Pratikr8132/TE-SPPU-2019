@@ -1,0 +1,304 @@
+19. Create Database DYPIT using MongoDB 
+Use DYPIT
+Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining )
+
+db.createCollection('Teachers')
+db.Teachers.insertMany([{
+    'Tname': 'Sojwal',
+    'dno': 1,
+    'dname': 'Computer',
+    'experience':11,
+    'salary':10001,
+    'date_of_joining':'1/1/2001'
+    }, 
+    {
+    'Tname': 'Omkar',
+    'dno': 2,
+    'dname': 'IT',
+    'experience':5,
+    'salary':100011,
+    'date_of_joining':'2/2/2012'
+    },
+{
+    'Tname': 'Arshad',
+    'dno': 3,
+    'dname': 'E&TC',
+    'experience':17,
+    'salary':200001,
+    'date_of_joining':'9/6/1996'
+    },
+{
+    'Tname': 'Akshay',
+    'dno': 2,
+    'dname': 'IT',
+    'experience':7,
+    'salary':10002,
+    'date_of_joining':'1/1/2011'
+    }])
+
+Students(Sname,roll_no,class)
+db.createCollection('Students')
+db.Students.insertMany([{
+    'Sname': 'Rupesh',
+    'roll_no': 1,
+    'class': 'Computer'
+    }, 
+    {
+    'Sname': 'Ramdas',
+    'roll_no': 2,
+    'class': 'E&TC'
+    },
+    {
+    'Sname': 'Chetan',
+    'roll_no': 3,
+    'class': 'IT'
+    }])
+1.	Find the information about all teachers
+db.Teachers.find().pretty()
+2.	Find the information about all teachers of computer department
+db.Teachers.find({'dname':'Computer'}).pretty()
+3.	Find the information about all teachers of computer,IT,ande&TC department
+db.Teachers.find().pretty()
+4.	Find the information about all teachers of computer,IT,and E&TC department having salary greate than or equl to 10000/-
+
+db.Teachers.find({'salary':{$gte:10000}}).pretty()
+5.	Find the student information having roll_no = 2 or Sname=xyz
+db.Students.find({$or:[{'roll_no':2},{'Sname':'xyz'}]}).pretty()
+6.	Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry.
+
+db.Teachers.insert({
+     'Tname': 'Praveen',
+     'dno': 3,
+     'dname': 'E&TC',
+     'experience':11,
+     'salary':5001,
+     'date_of_joining':'1/1/2021'
+     })
+
+db.Teachers.updateOne({Tname:'Praveen'}, {$set:{experience:10}})
+
+7.	Update the deparment of all the teachers working in IT deprtment to COMP
+db.Teachers.updateMany({dname:'IT'}, {$set:{dname:'Computer'}})
+8.	find the teachers name and their experience from teachers collection
+db.Teachers.find({},{dname:0,dno:0,salary:0,date_of_joining:0}).pretty()
+db.Teachers.find({},{dno:0,dname:0,salary:0,date_of_joining:0})
+9.	Using Save() method insert one entry in department collection
+
+db.Teachers.save({
+'Tname': 'Rajesh',
+     'dno': 1,
+     'dname': 'Computer',
+     'experience':8,
+     'salary':50001,
+     'date_of_joining':'1/1/2019'
+})
+10.	Using Save() method change the dept of teacher Rajesh to IT
+
+
+11.	Delete all the doccuments from teachers collection having IT dept
+
+db.Teachers.deleteMany({'dname':'IT'})
+
+12.	display with pretty() method, the first 3 doccuments in teachers collection in ascending order
+
+db.Teachers.find().sort({dno:1}).limit(3).pretty()
+
+
+
+
+
+
+
+
+
+
+
+20 1.Create Database DYPIT 
+2. Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining ) Students(Sname,roll_no,class)
+
+3. Find the information about two teachers
+db.Teachers.find().limit(2).pretty()
+4. Find the information about all teachers of computer department
+db.Teachers.find({dname:'Computer'}).pretty()
+
+	5. Find the information about all teachers of computer,IT,ande&TC department
+		db.Teachers.find().pretty()
+
+	6.. Find the information about all teachers of computer,IT,and E&TC department having salary greate than or equl to 25000/-
+		db.Teachers.find({'salary':{$gte:25000}}).pretty()
+
+	7. Find the student information having roll_no = 25 or Sname=xyz
+8. Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry. 
+db.Teachers.insert({
+     'Tname': 'Praveen',
+     'dno': 3,
+     'dname': 'E&TC',
+     'experience':11,
+     'salary':5001,
+     'date_of_joining':'1/1/2021'
+     })
+
+db.Teachers.updateOne({Tname:'Praveen'}, {$set:{experience:10}})
+9. Update the deparment of all the teachers working in IT deprtment to COMP
+db.Teachers.updateMany({dname:'IT'}, {$set:{dname:'Computer'}})
+ 10. find the teachers name and their experience from teachers collection 
+db.Teachers.find({},{dname:0,dno:0,salary:0,date_of_joining:0}).pretty()11. Using Save() method insert one entry in department collection
+ Same as 19
+
+13.	Delete all the doccuments from teachers collection having IT dept. 
+db.Teachers.deleteMany({'dname':'IT'})
+14. display with pretty() method, the first 5 documents in teachers collection in ascending order
+	db.Teachers.find().sort({dno:1}).limit(5).pretty()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21. Create Database DYPIT using MongoDB Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining ) Students(Sname,roll_no,class)
+
+1.	Find the information about all teachers 
+db.Teachers.find().pretty()
+2.	Find the average salary teachers of computer department 
+
+db.Teachers.aggregate([{$match:{"dname":"Computer"}},{$group : {_id : "$dname", salary_maximum : {$avg : "$salary"}}}])
+
+3.	Find the minimum and maximum salary of e&TC department teachers
+db.Teachers.aggregate([{$match:{"dname":"E&TC"}},{$group : {_id : "$dname", salary_maximum : {$max : "$salary"}, salary_minimum:{$min : "$salary"}}}])
+
+4.	Find the information about all teachers of computer,IT,and E&TC department having salary greate than or equl to 10000/- 
+
+db.Teachers.find({'salary':{$gte:10000}}).pretty()
+5.	Find the student information having roll_no = 2 or Sname=xyz
+Same as above questions
+6.	Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry. 
+Same s above questions.
+7.	Update the deparment of all the teachers working in IT deprtment to COMP 
+Same as above
+8.	find the teachers name and their experience from teachers collection 
+9.	db.Teachers.find({},{dname:0,dno:0,salary:0,date_of_joining:0}).pretty()Using Save() method insert one entry in department collection 
+Same as above
+
+10.	Find the total salary all teachers.
+db.Teachers.aggregate([{$group : {_id : "", total_salary : {$sum : "$salary"}}}])
+
+
+
+
+
+
+
+
+
+
+22. Create Database DYPIT using MongoDB Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining ) Students(Sname,roll_no,class)
+ 1. Display the department wise average salary
+db.Teachers.aggregate([{$group : {_id : "$dname", salary_avarage : {$avg : "$salary"}}}])
+
+ 2. display the no. Of employees working in each department
+db.Teachers.aggregate( [ { $unwind: "$dname" },  { $sortByCount: "$dname" } ] )
+ 3. Display the department wise total salary of departments having total salary greater than or equals to 50000/- 
+
+4. Write the queries using the different operators like max, min. Etc. 
+Refer above quetion
+5. Create unique index on any field for above given collections 
+db.Teachers.createIndex({Tname:1}, {unique:true})
+6. Create compound index on any fields for above given collections 
+
+7. Show all the indexes created in the database DYPIT 
+db.Teachers.getIndexes()
+8. Show all the indexes created in above collections.
+db.Teachers.getIndexes()
+
+
+
+23.CREATE INDEX AND FIRE QUERIES WITH MONGODB
+1.IMPOERT ZIP FILE
+mongoimport --dbsai --collection zip --file C:\Users\OMKAR\Desktop\zips.json
+2.Create single field,composite and multikey indexes,
+SINGLE->
+db.student.createIndex({name:1})//ASCENDING
+db.student.createIndex({language:-1})//DESCINDING
+MULTIPLE->
+db.student.createIndex({name:1,language:-1})
+
+3)1) >1600
+
+db.student.aggregate( [
+   { $group: { _id: "$state", totalPop: { $sum: "$pop" } } },
+   { $match: { totalPop: { $gte: 10*1000*1000 } } }
+] 
+2) "KS"
+
+
+
+
+
+
+24. Design and Implement following query using MongoDB
+ 1. Create a collection called ‘games’. 
+2. Add 5 games to the database. Give each document the following properties: name, gametype, rating (out of 100) 
+db.games.insertMany([{
+    'name': 'life',
+    'gametype': 'joke',
+    'rating': 100
+    }, 
+    {
+    'name': 'Crypto',
+    'gametype': 'Luck',
+    'rating': 10
+    },
+   {
+    'name': 'Solitare',
+    'gametype': 'card',
+    'rating': 80
+    },
+	{
+    'name': 'Pubg',
+    'gametype': 'FPS',
+    'rating': 80
+    },
+	{
+    'name': 'GTA',
+    'gametype': 'open_world',
+    'rating': 75
+    }])
+3. Write a query that returns all the games
+db.games.find().pretty()
+ 4. Write a query that returns the 3 highest rated games.
+db.games.find().sort({rating:-1}).limit(3).pretty()
+ 5. Update your two favourite games to have two achievements called ‘Game Master’ and ‘Speed Demon’.
+db.games.updateOne({name:"GTA"}, {$set:{achievements:"Game-master,Speed-daemon"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+db.games.updateOne({name:"life"},
+... {$set:{achievements:"Game-master","Speed-daemon"}})
+ 6. Write a query that returns all the games that have both the ‘Game Maser’ . the ‘Speed Demon’ achievements.
+db.games.find({"achievements":"Game-master,Speed-daemon"}).pretty()
+ 8. Write a query that returns only games that have achievements
+
+
+
+
+
+
+
+
+
+26. Using MapReduce in mongodb solve following queries on given below collection. 
+1. Import zip.json. 
+mongoimport --dbsai --collection zip --file C:\Users\OMKAR\Desktop\zips.json
+2. Find total population in each state.
+db.zip.mapReduce( function() {emit(this.state,this.pop);}, function(key,value){return Array.sum(value)}, { query:{state:"MA"},out:"state_pop_totals"});
+
+db.state_pop_totals.find();

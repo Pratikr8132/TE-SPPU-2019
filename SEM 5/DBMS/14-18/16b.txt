@@ -1,0 +1,49 @@
+ create table salary(
+     emp_id int,
+     salary int
+     );
+
+ insert into salary values (1, 5000);
+insert into salary values (2, 8000);
+insert into salary values (3, 9000);
+insert into salary values (4, 10000);
+insert into salary values (6, 100000);
+
+create table incr_salary(
+    e_id int,
+    inc_salary int
+    );
+
+
+delimiter //
+create procedure inc_salary()
+begin
+declare temp_salary int;
+declare temp_id int;
+declare avg_salary int;
+declare exitcond boolean;
+declare cur cursor for select emp_id from salary;
+declare cur2 cursor for select salary from salary;
+declare continue handler for not found set exitcond=true;
+select avg(salary) into avg_salary from salary;
+open cur;
+open cur2;
+l1:loop
+fetch cur into temp_id;
+fetch cur2 into temp_salary;
+if(temp_salary<avg_salary) then
+set temp_salary=temp_salary+temp_salary*0.1;
+insert into incr_salary values(temp_id,temp_salary);
+end if;
+if exitcond then
+close cur;
+close cur2;
+leave l1;
+end if;
+end loop l1;
+end
+//
+
+ call inc_salary();
+
+ select * from incr_salary;

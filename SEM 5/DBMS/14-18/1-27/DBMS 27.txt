@@ -1,0 +1,53 @@
+27 Mongodb
+
+ use library;
+switched to db library
+> show dbs;
+DYPIT    0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+student  0.000GB
+>  book1 = {name : "Understanding JAVA", pages : 100}  
+{ "name" : "Understanding JAVA", "pages" : 100 }
+> book2 = {name : "Understanding JSON", pages : 200}  
+{ "name" : "Understanding JSON", "pages" : 200 }
+> db.books.save(book1)  
+WriteResult({ "nInserted" : 1 })
+> db.books.save(book2)  
+WriteResult({ "nInserted" : 1 })
+> db.books.find();  
+{ "_id" : ObjectId("637081620f41a217fc02de5d"), "name" : "Understanding JAVA", "pages" : 100 }
+{ "_id" : ObjectId("6370816a0f41a217fc02de5e"), "name" : "Understanding JSON", "pages" : 200 }
+> book = {name : "Understanding XML", pages : 300}
+{ "name" : "Understanding XML", "pages" : 300 }
+> db.books.save(book)
+WriteResult({ "nInserted" : 1 })
+> book = {name : "Understanding Web Services", pages : 400}
+{ "name" : "Understanding Web Services", "pages" : 400 }
+> db.books.save(book)
+WriteResult({ "nInserted" : 1 })
+>  book = {name : "Understanding Axis2", pages : 150}  
+{ "name" : "Understanding Axis2", "pages" : 150 }
+> db.books.save(book)
+WriteResult({ "nInserted" : 1 })
+> var map = function() {  
+...     var category;  
+...     if ( this.pages >= 250 )  
+...     category = 'Big Books';  
+...     else  
+...     category = "Small Books";  
+...     emit(category, {name: this.name});  
+...     };  
+> var reduce = function(key, values) {  
+...     var sum = 0;  
+...     values.forEach(function(doc) {  
+...     sum += 1;  
+...     });  
+...     return {books: sum};  
+...     };  
+> var count  = db.books.mapReduce(map, reduce, {out: "book_results"});
+> db[count.result].find()  
+{ "_id" : "Big Books", "value" : { "books" : 2 } }
+{ "_id" : "Small Books", "value" : { "books" : 3 } }
+>

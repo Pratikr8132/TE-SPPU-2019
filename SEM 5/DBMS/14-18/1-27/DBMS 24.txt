@@ -1,0 +1,32 @@
+24 mongodb
+
+db.games.insertOne({name:'cricket'},{gametype:'outdoor'},{rating:80});
+
+
+db.games.insertOne({name:'carrom'},{gametype:'indoor'},{rating:70});
+
+
+db.games.insertOne({name:'football'},{gametype:'outdoor'},{rating:85});
+
+
+db.games.insertOne({name:'chess'},{gametype:'indoor'},{rating:89});
+
+
+db.games.insertOne({name:'hockey'},{gametype:'outdoor'},{rating:92});
+
+
+db.games.find()
+
+db.games.updateOne({name:"cricket"},{$set :{achievements:"Game Master"}});
+
+
+db.games.updateOne({name:"carrom"},{$set :{achievements:"Speed Demon"}});
+
+
+db.games.find().pretty()
+
+
+db.games.find({achievements:{$exists:true}});
+
+
+db.games.find({rating : {$exists:true}}).limit(3)

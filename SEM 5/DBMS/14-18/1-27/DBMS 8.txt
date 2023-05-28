@@ -1,0 +1,73 @@
+
+
+
+**********************practcile no 8******************
+Consider the following database
+Employee(emp_no,name,skill,pay-rate) eno primary key
+Position(posting_no,skill) posting_no primary key
+Duty_allocation(posting_no,emp_no,day,shift)
+
+Find the SQL queries for the following:
+
+1. Get the duty allocation details for emp_no 123461 for the month of April 1986.
+2. Find the shift details for Employee ‘xyz’
+3. Get employees whose rate of pay is more than or equal to the rate of pay of employee ‘xyz’
+4. Get the names and pay rates of employees with emp_no less than 123460 whose rate of pay is 
+more than the rate of pay of at least one employee with emp_no greater than or equal to 123460.
+5. Find the names of employees who are assigned to all positions that require a Chef’s skill
+6 .Find the employees with the lowest pay rate
+7 .Get the employee numbers of all employees working on at least two dates.
+8 .Get a list of names of employees with the skill of Chef who are assigned a duty
+9 .Get a list of employees not assigned a duty
+10.Get a count of different employees on each shift
+
+1. SELECT  POSTING_NO, DAY, SHIFT 
+      FROM DUTY_ALLOCATION
+       WHERE EMP_NO=123461 AND
+       DAY >=19860401 AND DAY <= 19860430
+
+
+2.SELECT  POSTING_NO, DAY, SHIFT 
+      FROM DUTY_ALLOCATION,EMPLOYEE
+       WHERE  DUTY_ALLOCATION.EMP_NO=EMPLOYEE.EMP_NO
+                                             AND
+                                      NAME=‘XYZ’
+
+3.SELECT S.NAME, S.PAY_RATE
+      FROM EMPLOYEE AS S, EMPLOYEE AS T
+      WHERE  S.PAY_RATE > =T.PAY_RATE  
+       AND T.NAME=‘XYZ’
+
+
+4. SELECT NAME, PAY_RATE 
+      FROM EMPLOYEE
+      WHERE  EMP_NO < 123460 AND
+       PAY_RATE > (SELECT  PAY_RATE
+                           FROM EMPLOYEE  WHERE  EMP_NO >= 123460 ) 
+
+5.SELECT  EMP_NO, POSTING_NO, SKILL
+       FROM EMPLOYEE, POSITION
+       WHERE  EMPLOYEE.SKILL = POSITION.SKILL
+
+6.SELECT EMP_NO , NAME, PAY_RATE
+      FROM EMPLOYEE
+      WHERE PAY_RATE<=ALL
+                       (SELECT  PAY_RATE
+                         FROM EMPLOYEE)
+
+
+8.SELECT  NAME FROM  EMPLOYEE WHERE EMP_NO IN
+      ((SELECT EMP_NO FROM EMPLOYEE
+         WHERE SKILL = ‘CHEF’)
+         INTERSECT
+         (SELECT EMP_NO 
+          FROM DUTY_ALLOCATION)
+
+
+9.(SELECT  EMP_NO FROM  EMPLOYEE)
+        MINUS 
+         (SELECT EMP_NO 
+          FROM DUTY_ALLOCATION)
+           
+
+10. 

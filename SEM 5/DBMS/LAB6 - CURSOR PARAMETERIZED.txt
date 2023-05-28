@@ -1,0 +1,93 @@
+WRITE PLSLQL BLOCK OF CODE USING PARAMETERIZED CURSOR THAT WILL MERGE THE DATA AVAILABALE IN NEWLY CREATED............
+
+
+mysql> CREATE TABLE O_ROLLCALL(
+-> RNO INTEGER PRIMARY KEY,
+-> NAME VARCHAR(50));
+Query OK, 0 rows affected (0.01 sec)
+mysql> INSERT INTO O_ROLLCALL VALUES(1, 'A');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO O_ROLLCALL VALUES(2, 'B');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO O_ROLLCALL VALUES(3, 'C');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO O_ROLLCALL VALUES(4, 'D');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO O_ROLLCALL VALUES(5, 'E');
+Query OK, 1 row affected (0.00 sec)
+mysql> SELECT *FROM O_ROLLCALL;
++-----+------+
+| RNO | NAME |
++-----+------+
+| 1 | A |
+| 2 | B |
+| 3 | C |
+| 4 | D |
+| 5 | E |
++-----+------+
+5 rows in set (0.00 sec)
+mysql> CREATE TABLE N_ROLLCALL(
+-> RNO INTEGER,
+-> NAME VARCHAR(50));
+Query OK, 0 rows affected (0.03 sec)
+mysql> INSERT INTO N_ROLLCALL VALUES(1, 'A');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO N_ROLLCALL VALUES(3, 'C');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO N_ROLLCALL VALUES(5, 'E');
+Query OK, 1 row affected (0.00 sec)
+mysql> SELECT *FROM N_ROLLCALL;
++------+------+
+| RNO | NAME |
++------+------+
+| 1 | A |
+| 3 | C |
+| 5 | E |
++------+------+
+3 rows in set (0.00 sec)
+mysql> DELIMITER $
+mysql> CREATE PROCEDURE PROD(IN ROLL1 INT)
+-> BEGIN
+-> DECLARE ROLL2 INT;
+-> DECLARE EXITCONDITION BOOLEAN;
+-> DECLARE CUR1 CURSOR FOR SELECT RNO FROM O_ROLLCALL WHERE RNO>ROLL1;
+-> DECLARE CONTINUE HANDLER FOR NOT FOUND SET EXITCONDITION = TRUE;
+-> OPEN CUR1;
+-> L1: LOOP
+-> FETCH CUR1 INTO ROLL2;
+-> IF NOT EXISTS (SELECT* FROM N_ROLLCALL WHERE RNO = ROLL2) THEN
+-> INSERT INTO N_ROLLCALL SELECT* FROM O_ROLLCALL WHERE RNO = ROLL2;
+-> END IF;
+-> IF EXITCONDITION THEN
+-> CLOSE CUR1;
+-> LEAVE L1;
+-> END IF;
+-> END LOOP L1;
+-> END;
+-> $
+Query OK, 0 rows affected (0.01 sec)
+mysql> CALL PROD(1);
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT*FROM N_ROLLCALL;
++------+------+
+| RNO | NAME |
++------+------+
+| 1 | A |
+| 3 | C |
+| 5 | E |
+| 4 | D |
+| 2 | B |
++------+------+
+5 rows in set (0.00 sec)
+mysql> SELECT*FROM N_ROLLCALL
+-> ORDER BY RNO;
++------+------+
+| RNO | NAME |
++------+------+
+| 1 | A |
+| 2 | B |
+| 3 | C |
+| 4 | D |
+| 5 | E |
++------+------+
+5 rows in set (0.00 sec

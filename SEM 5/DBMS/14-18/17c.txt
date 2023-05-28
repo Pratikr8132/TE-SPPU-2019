@@ -1,0 +1,34 @@
+create table emp(
+e_no int,
+d_no int,
+salary int);
+
+create table dept_salary(
+d_no int primary key,
+avg_salary int);
+
+
+insert into emp values(1, 200, 160000);
+insert into emp values(2, 100, 7000);
+insert into emp values(2, 200, 16000);
+insert into emp values(3, 100, 16000);
+insert into emp values(3, 200, 70000);
+
+delimiter $
+create procedure avgsalary(in dno int)
+begin
+declare avg_sal int;
+declare exitcondition boolean;
+declare cur1 CURSOR for select d_no, salary from emp;
+declare continue handler for not found set exitcondition = TRUE;
+open cur1;
+L1: LOOP
+fetch cur1 into dno, avg_sal;
+insert into dept_salary select d_no, avg(salary) from emp where d_no = dno;
+if exitcondition then
+close cur1;
+leave L1;
+end if;
+end LOOP L1;
+end;
+$

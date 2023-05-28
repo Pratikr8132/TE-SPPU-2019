@@ -1,0 +1,18 @@
+q1] Display customer name having living city Bombay and branch city Nagpur
+select d.cname from deposit d inner join custumers c on c.cname=d.cname inner join branch b on d.bname =b.bname where c.city ='mumbai' and c.city ='nagpur';
+
+q2]Display customer name having same living city as their branch city
+
+select c.city,c.cname ,b.bname from custumers c inner join branch b on c.city=b.city inner join deposit d on b.bname=d.bname; 
+
+q3]Display customer name who are borrowers as well as depositors and having
+living city Nagpur.
+
+SELECT C.CNAME  FROM custumers C INNER JOIN deposit D ON C.CNAME=D.CNAME INNER JOIN borrow B ON B.CNAME=D.CNAME WHERE C.CITY='NAGPUR';
+
+q4]Create an index on deposit table
+create index cname on deposit(cname);
+
+q5]Display customer name living in the city where branch of depositor sunil is
+located.
+select cname from deposit d,branch b where d.bname=b.bname and b.city=(select b.city from branch b, deposit d where b.bname = d.bname and d.cname='sunil');

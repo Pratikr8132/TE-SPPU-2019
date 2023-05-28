@@ -1,0 +1,86 @@
+create table Emp(
+    eno int primary key,
+    ename varchar(30),
+    job varchar(30),
+    hiredate date,
+    salary float(15,2),
+    commission float(10,2),
+    deptno int);
+
+create table dept(
+    deptno int,
+    deptname varchar(30),
+    location varchar(30));
+
+insert into Emp values(1, 'John', 'Manager','2008-10-05', 150000, 5000, 30);
+insert into Emp values(2, 'Ivan', 'Tester','2009-06-13', 200000, 10000, 20);
+insert into Emp values(3, 'Alex', 'Developer','1976-11-12', 300000, 15000, 10);
+insert into Emp values(4, 'Maria', 'Tester','2002-01-15', 200000, 15000, 10);
+
+insert into dept values(10, 'Dev', 'San Francisco');
+insert into dept values(20, 'Test', 'San Francisco');
+insert into dept values(30, 'Sales', 'San Francisco');
+
+
+--1. List the maximum salary paid to salesman 
+
+select max(salary)
+from Emp
+where job = 'Tester';
+
+--2. List name of emp whose name start with ‘I’
+
+select ename
+from Emp
+where ename like 'I%';
+
+--3. List details of emp who have joined before ’30-sept-81’
+
+select * from Emp
+where hiredate < '1981-09-30';
+
+--4. List the emp details in the descending order of their basic salary
+
+select *from Emp
+order by salary desc;
+
+--5. List of no. of emp & avg salary for emp in the dept no ‘20’
+
+select count(eno) as Total_employees, avg(salary) as salary
+from Emp
+where deptno = 30;
+
+--6. List the avg salary, minimum salary of the emp hiredatewise for dept no ‘10’
+
+select avg(salary) as Average_salary, min(salary) as Minimum_salary
+from Emp
+where deptno = 10
+order by hiredate asc;
+
+--7. List emp name and its department
+
+select E.ename, D.deptname
+from Emp E, dept D
+where E.deptno = D.deptno;
+
+--8. List total salary paid to each department
+
+select sum(salary) as Total_salary, deptname
+from Emp, dept
+where Emp.deptno = dept.deptno
+group by dept.deptname
+order by Total_salary;
+
+--9. List details of employee working in ‘Dev’ department
+
+select *from Emp, dept
+where Emp.deptno = dept.deptno and dept.deptname = 'Dev';
+
+--10. Update salary of all employees in deptno 10 by 5 %
+
+update Emp
+set salary = salary+salary*0.05
+where deptno = 10;
+
+create view temp
+(select *from Emp union all select *from dept);

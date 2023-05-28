@@ -1,0 +1,77 @@
+create database hotel;
+use hotel;
+create table hotel (
+hotelno int primary key not null,
+hname varchar(30),
+city varchar(30)
+);
+
+insert into hotel values(100, 'radission', 'nagpur');
+insert into hotel values(200, 'grosvenor', 'pune');
+insert into hotel values(300, 'athitya', 'mumbai');
+insert into hotel values(400, 'tatvam', 'new york');
+insert into hotel values(500, 'tuli imperial', 'london');
+
+create table room (
+roomno int primary key not null,
+hotelnos int,
+rtype varchar(30),
+price int
+);
+
+insert into room values(11, 100, 'classic', '500');
+insert into room values(17, 100, 'delux', '5500');
+insert into room values(12, 200, 'semi-classic', '1500');
+insert into room values(13, 300, 'deluxe', '2500');
+insert into room values(14, 400, 'super-delxue', '5000');
+insert into room values(15, 500, 'premium', '10000');
+
+create table booking (
+hotelnoss int,
+guestnoss int,
+datefrom int primary key not null ,
+dateto int,
+rno int
+);
+
+insert into booking values(100, 1001, 25-5-2002, 30-5-2002, 11);
+insert into booking values(200, 1002, 20-6-2003, 25-6-2003 , 12);
+insert into booking values(300, 1003, 19-5-2001, 28-5-2001, 13);
+insert into booking values(400, 1004, 30-7-2004, 5-8-2004, 14);
+insert into booking values(500, 1005, 27-5-2022, 5-6-2022,15);
+
+create table guest (
+guestno int primary key,
+guest_name varchar(30),
+guest_add varchar(40)
+);
+
+insert into guest values(1001, 'walter', 'nagpur');
+insert into guest values(1002, 'pinkman', 'pune');
+insert into guest values(1003, 'hank', 'mumbai');
+insert into guest values(1004, 'gusto', 'new york');
+insert into guest values(1005, 'gretchen', 'bhopal');
+
+
+select * from hotel;
+
+select count(*) from hotel;
+
+select price, rtype from room,hotel where hotel.hotelno = room.hotelnos and hname = 'grosvenor';
+
+select count(roomno) from room;
+
+update room set price = price + price*0.05;
+
+select * from hotel where city = 'london';
+
+select avg(price) from room;
+
+select guest_name,guest_add from guest,booking,hotel where guest.guestno = booking.guestnoss and booking.hotelnoss = hotel.hotelno and 
+hotel.hname =' grosvenor';
+
+select count(*) from room,hotel where room.hotelnos = hotel.hotelno and city = 'london';
+
+create view hotel_view as
+select * from hotel,room,booking,guest;
+select * from hotel_view;

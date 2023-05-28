@@ -1,0 +1,22 @@
+create table client_master(
+    -> id int,
+    -> bal_due int
+    -> );
+insert into client_master(1 , 5000);
+insert into client_master values(2 , 000);
+insert into client_master values(3 , -4647);
+
+create procedure check_bal(in cid int)
+begin
+declare balance int;
+declare exit handler for sqlexception select 'BR violated' message;
+select bal_due into balance from client_master where id = cid;
+if (balance<0) then select 'BR violated' message;
+else
+select 'Accepted'message;
+end if;
+end;
+$
+
+call check_bal(3)
+$

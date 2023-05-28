@@ -1,0 +1,21 @@
+q4]
+1. What is the total revenue per night from all double rooms? 
+select SUM(price)from Room where type1 = 'double';
+2. List the details of all rooms at the Grosvenor Hotel, including the name of the guest staying in the room, if the room is occupied. 
+SELECT r.* FROM Room r LEFT JOIN (SELECT g.guestname, h.hotelno, b.roomno FROM Guest g, Booking b, Hotel h WHERE g.guestno = b.guestno AND b.hotelno = h.hotelno AND name='Grosvenor' AND datefrom <= CURRENT_DATE AND dateto >= CURRENT_DATE) AS XXX ON r.hotelno = XXX.hotelno AND r.roomno = XXX.roomno;
+3. What is the average number of bookings for each hotel in April? 
+SELECT COUNT(DISTINCT guestNo) FROM Booking WHERE (datefrom <='2022-08-01' AND dateto>='2022-08-01') OR (datefrom >='2022-08-01' AND datefrom <= '2022-08-31');
+4. Create index on one of the field and show is performance in query. 
+CREATE INDEX show ON Hotel (hotelno, name);
+5. List full details of all hotels. 
+select h.hotelno,h.name,h.city,r.type1,r.price from Hotel h, Room r ;
+6. List full details of all hotels in London. 
+SELECT * FROM Hotel WHERE city = 'London';
+7. Update the price of all rooms by 5%. 
+update Room set price = price + 5; 
+ select  * from Room;
+8. List the number of rooms in each hotel in London. 
+SELECT h.hotelno ,COUNT(roomNo) AS count FROM Room r, Hotel h WHERE r.hotelno = h.hotelno AND city = 'London' GROUP BY hotelno; 
+9. List all double or family rooms with a price below £40.00 per night, in ascending order of price
+SELECT * FROM Room WHERE price < '40' AND type1 IN ('double', 'family')
+ ORDER BY price;

@@ -1,0 +1,75 @@
+create table employee(
+	employee_name varchar(30) primary key,
+	street varchar(30),
+	city varchar(30)); 
+	
+create table works(
+	employee_name varchar(30),
+	company_name varchar(30),
+	salary varchar(30)); 
+	
+create table company(
+	company_name varchar(30) primary key,
+	city varchar(30)); 
+	
+create table manages(
+	employee_name varchar(30),
+	city varchar(30)); 
+
+
+insert into employee values('qwe', 'link_road','chinchwad');
+insert into employee values('asd', 'pmc_road','pimpri');
+insert into employee values('zxc', 'dapoli_road','kokan');
+insert into employee values('rty', 'ring_road','mumbai');
+insert into employee values('fgh', 'sus_road','pashan');
+
+
+insert into works values('qwe', 'qaz','10000');
+insert into works values('asd', 'wsx','15000');
+insert into works values('zxc', 'edc','18000');
+insert into works values('rty', 'rfv','19000');
+insert into works values('fgh', 'tgb','74000');
+
+insert into company values('qaz','chinchwad');
+insert into company values('wsx','chinchwad');
+insert into company values('edc','chinchwad');
+insert into company values('rfv','mumbai');
+insert into company values('tgb','mumbai');
+
+insert into manages values('qwe','qqq');
+insert into manages values('asd','aaa');
+insert into manages values('zxc','zzz');
+insert into manages values('rty','rrr');
+insert into manages values('fgh','fff');
+--1
+select employee_name from works where company_name = 'wsx';
+
+--2
+select employee_name from works where company_name <>'wsx';
+
+--3
+insert into works values('afg', 'wsx','25000');
+
+select count(employee_name) as cnt, company_name
+ from works 
+ group by company_name
+ order by cnt desc limit 1;
+
+--4
+select company_name, city 
+ from company where city in (select city from company where company_name ='qaz');
+
+--5
+
+select employee_name from works where salary >10000;
+
+--6
+update works set salary = salary+salary*0.1 where company_name = 'qaz';
+--7
+select * from manages;
+
+--8 
+select * from employee,works where works.employee_name =employee.employee_name and works.company_name= 'qaz' and works.salary>10000;
+
+--9
+select company_name from works where salary>(select avg(salary) from works where company_name = 'wsx');

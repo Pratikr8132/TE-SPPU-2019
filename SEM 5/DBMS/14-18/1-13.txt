@@ -1,0 +1,753 @@
+1. Create a db called company consist of the following tables.
+1.Emp (eno,ename, job,hiredate,salary,commission,deptno,) 
+2.dept(deptno,deptname,location) 
+eno is primary key in emp 
+deptno is primary key in dept 
+create table Emp(eno int(10),ename varchar(10),job varchar(10), hiredate date,salary varchar(10),commision varchar(10),deptno varchar(20));
+create table dept(deptno varchar(20),deptname varchar(20),location varchar(20));
+ALTER TABLE Emp ADD PRIMARY KEY (eno);
+ALTER TABLE dept ADD PRIMARY KEY (deptno);
+
+insert into Emp(eno,ename,job,hiredate,salary,commision,deptno) values (01,'ABC','manager',2022/01/02,'5000','2000','10');
+insert into Emp(eno,ename,job,hiredate,salary,commision,deptno) values (02,'PQR','salesman',2022/01/02,'1001','500','20');
+insert into Emp(eno,ename,job,hiredate,salary,commision,deptno) values (03,'XYZ','manager',2022/01/02,'1000','2500','10');
+insert into Emp(eno,ename,job,hiredate,salary,commision,deptno) values (04,'LMN','salesman',2022/01/02,'500','2500','20');
+insert into dept (deptno,deptname,location) values ('10','production','Pune');
+insert into dept (deptno,deptname,location) values ('20','Marketing','Mumbai');
+
+Solve Queries by SQL
+ 1. List the maximum salary paid to salesman
+SELECT MAX(salary)FROM Emp where job = 'salesman' ;
+ 2. List name of emp whose name start with ‘I’ 
+select * from Emp where ename like 'I%'
+3. List details of emp who have joined before ’30-sept-81’ 
+select * from Emp where hiredate < 30/09/1981;
+4. List the emp details in the descending order of their basic salary 
+select * from Emp order by salary desc;
+5. List of no. of emp & avg salary for emp in the dept no ‘20’ 
+SELECT COUNT(ename)from Emp;
+SELECT AVG(salary)from Emp where deptno = '20'
+
+6. List the avg salary, minimum salary of the emp hiredatewise for dept no ‘10’. 
+SELECT AVG(salary) from Emp where deptno = '10' ;
+SELECT MIN(salary) from Emp where deptno = '10' ;
+
+7. List emp name and its department 
+select Emp.ename,dept.deptno from Emp inner join dept on Emp.deptno = dept.deptno;
+
+8. List total salary paid to each department 
+SELECT SUM(salary) from Emp where deptno = '10';
+SELECT SUM(salary) from Emp where deptno = '20';
+
+9. List details of employee working in ‘Dev’ department 
+SELECT Emp.ename, dept.deptname from Emp inner join dept on Emp.deptno = dept. deptno where deptname = 'Dev';
+
+10. Update salary of all employees in deptno 10 by 5 %.
+update Emp set salary = salary + 5 where deptno = '10';
+select * from Emp;
+
+
+
+
+
+Q.2
+1. employee (employee name, street, city) ,employee name is primary key 
+2. works (employee name, company name, salary)
+ 3. company (company name, city) ,company name is primary key
+ 4. manages (employee name, manager name)
+create table employee(employeename varchar(20) primary key,street varchar(20),city varchar(20));
+insert into employee(employeename, street,city) values ('Neha','A street','A city');
+insert into employee(employeename, street,city) values ('Reesha','B street','B city');
+insert into employee(employeename, street,city) values ('Ritika','C street','C city');
+insert into employee(employeename, street,city) values ('Ritu','C street','C city');
+insert into employee(employeename, street,city) values ('Ryan','A street','A city');
+insert into employee(employeename, street,city) values ('Kelly','B street','B city');
+
+create table company(companyname varchar(20) primary key,city varchar(20));
+insert into company (companyname , city)values ('First Bank Corporation','A city');
+insert into company (companyname , city)values('Small Bank Corporation','B city');
+insert into company (companyname , city)values('No Bank Corporation','C city');
+insert into company (companyname , city)values('Yes Bank Corporation','A city');
+insert into company (companyname , city)values('More Bank Corporation','B city');
+
+create table works(employeename varchar(20),companyname varchar(20),salary double);
+insert into works (employeename,companyname, salary)values('Neha','First Bank Corporation',40000);
+insert into works (employeename,companyname, salary)values('Reesha','Small Bank Corporation',30000);
+insert into works (employeename,companyname, salary)values('Ritika','No Bank Corporation',35000);
+insert into works (employeename,companyname, salary)values('Ritu','Small Bank Corporation',25000);
+insert into works (employeename,companyname, salary)values('Ryan','First Bank Corporation',15000);
+insert into works (employeename,companyname, salary)values('Kelly','First Bank Corporation',10000);
+
+create table manages(employeename varchar(20),managername varchar(20));
+insert into manages (employeename,managername )values ('Neha','Ryan');
+insert into manages (employeename,managername )values('Neha','Kelly');
+insert into manages (employeename,managername )values('Reesha','Ritu');
+
+Give an expression in SQL for each of the following queries.
+ 1. Find the names of all employees who work for First Bank Corporation. 
+select employeename from works where companyname='First Bank Corporation';
+2. Find all employees who do not work for First Bank Coorporation 
+select employeename from works where companyname<>'First Bank Corporation';
+3. Find the company that has most employees. 
+
+4. Find all companies located in every in which small bank corporation is located
+
+5. Find details of employee having salary greater than 10,000.
+select * from works where salary>10000;
+6. Update salary of all employees who work for First Bank Corporation by 10%. 
+update works set salary=salary+10 where companyname ='First Bank Corporation';
+select * from works;
+7. Find employee and their managers.
+Select * from manages;
+8. Find the names, street and cities of all employees who work for First Bank Corporation and earn more than 10,000. 
+select e.employeename,e.street,e.cityfrom employee e, works w where e.employeename=w.employeename and companyname="First Bank Corporation"and salary > 10000 ;
+
+9. Find those companies whose employees earn a higher salary,on average, than the average salary at First Bank Corporation
+select AVG(salary) from works where companyname='First Bank Corporation';
+
+
+
+
+
+
+
+
+Q.3 
+The following tables form part of a database held in a relational DBMS: 
+Hotel (HotelNo, Name, City) HotelNo is the primary key
+
+ Room (RoomNo, HotelNo, Type, Price) 
+Booking (HotelNo, GuestNo, DateFrom, DateTo, RoomNo) 
+Guest (GuestNo, GuestName, GuestAddress) GuestNo is primary key 
+Room contains room details for each hotel and (HotelNo, RoomNo) forms the primary key.
+Booking contains details of the bookings and the primary key comprises (HotelNo, GuestNo and DateFrom) 
+
+create table Hotel(hotelNo varchar(20) primary key , name varchar(40), city varchar (40));
+create table Room(roomno varchar(20)primary key,hotelno varchar (20),type varchar(20),price varchar(20));
+create table Booking(hotelNo varchar(20),guestno varchar(20),dateFrom varchar(20),dateTo varchar(20),roomno varchar(20));
+create table Guest(guestno varchar(20)primary key,guestname varchar(20),guestaddress varchar(50));
+
+insert into Hotel(hotelNo,name,city)values ('01','Grosvenor','Newyork');
+insert into Hotel(hotelNo,name,city)values ('02','Indigo','Delhi');
+insert into Hotel(hotelNo,name,city)values ('03','Zen','London');
+insert into Hotel(hotelNo,name,city)values ('04','Italia','Chikago');
+insert into Hotel(hotelNo,name,city)values ('05','Bukhara','Los Angeles');
+
+insert into Room(roomno,hotelNo,type,price)values('11','01','suit','12000');
+insert into Room(roomno,hotelNo,type,price)values('13','01','presedential suit','100000');
+insert into Room(roomno,hotelNo,type,price)values('14','03','deluxe','8000');
+insert into Room(roomno,hotelNo,type,price)values('15','04','studio','15000');
+insert into Room(roomno,hotelNo,type,price)values('16','05','super deluxe','14000');
+
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','22',2022/08/02,2022/09/03,'11');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','23',2021/10/04,2021/10/05,'13');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('03','24',2020/07/08,2020/07/09,'14');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('05','25',2022/08/07,2022/08/08,'16');
+
+insert into Guest(guestno,guestname,guestaddress) values ('23','ABC','Newyork');
+insert into Guest(guestno,guestname,guestaddress) values ('24','ABC','London');
+insert into Guest(guestno,guestname,guestaddress) values ('25','ABC','Delhi');
+insert into Guest(guestno,guestname,guestaddress) values ('22','ABC','Mumbai');
+
+Solve following queries by SQL
+ 1. List full details of all hotels. 
+SELECT * FROM Hotel;
+2. How many hotels are there? 
+SELECT COUNT(*) FROM Hotel;
+3. List the price and type of all rooms at the Grosvenor Hotel. 
+SELECT price, type FROM Room WHERE hotelNo = (SELECT hotelNo FROM Hotel WHERE name= ‘Grosvenor Hotel’);
+4. List the number of rooms in each hotel. 
+SELECT hotelNo, COUNT(roomNo) AS count FROM Room GROUP BY hotelNo;
+5. Update the price of all rooms by 5%.
+Update Room set price=price+5;
+ 6. List full details of all hotels in London. 
+SELECT * FROM Hotel WHERE city = ‘London’;
+7. What is the average price of a room? 
+SELECT AVG(price) FROM Room;
+8. List all guests currently staying at the Grosvenor Hotel. 
+SELECT * FROM Guest WHERE guestno = (SELECT guestNo FROM Booking WHERE dateFrom <= CURRENT_DATE AND dateTo >= CURRENT_DATE AND hotelNo = (SELECT hotelNo FROM Hotel WHERE name = ‘Grosvenor’));
+9. List the number of rooms in each hotel in London. 
+SELECT hotelNo, COUNT(roomNo) AS count FROM Room r, Hotel h WHERE r.hotelNo = h.hotelNo AND city = ‘London’ GROUP BY hotelNo;
+10.Create one view on above database and query it.
+create view show as select hotelno,name from Hotel;
+if it gives error then put show (i.e view_name in square brackets [ ])
+
+
+
+
+
+
+
+Q4.  The following tables form part of a database held in a relational DBMS: 
+Hotel (HotelNo, Name, City) HotelNo is primary key 
+Room (RoomNo, HotelNo, Type, Price) 
+Booking (HotelNo, GuestNo, DateFrom, DateTo, RoomNo)
+Guest (GuestNo, GuestName, GuestAddress) GuestNo is primary key
+create table Hotel(hotelno varchar(20) primary key , name varchar(40), city varchar (40));
+create table Room(roomno varchar(20)primary key,hotelno varchar (20),type varchar(20),price varchar(20));
+create table Booking(hotelno varchar(20),guestno varchar(20),datefrom varchar(20),dateto varchar(20),roomno varchar(20));
+create table Guest(guestno varchar(20)primary key,guestname varchar(20),guestaddress varchar(50));
+
+insert into Hotel(hotelno,name,city)values ('01','Grosvenor','Newyork');
+insert into Hotel(hotelno,name,city)values ('02','Indigo','Delhi');
+insert into Hotel(hotelno,name,city)values ('03','Zen','London');
+insert into Hotel(hotelno,name,city)values ('04','Italia','Chikago');
+insert into Hotel(hotelno,name,city)values ('05','Bukhara','Los Angeles');
+
+insert into Room(roomno,hotelno,type1,price)values('11','01','double','12000');
+insert into Room(roomno,hotelno,type1,price)values('13','01','presedential suit','100000');
+insert into Room(roomno,hotelno,type1,price)values('14','03','deluxe','8000');
+insert into Room(roomno,hotelno,type1,price)values('15','04','studio','15000');
+insert into Room(roomno,hotelno,type1,price)values('16','05','family','14000');
+
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','22','2022/08/02','2022/08/03','11');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','23','2021/10/04','2021/10/05','13');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('03','24','2020/07/08','2020/07/09','14');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('05','25','2022/08/07','2022/08/08','16');
+
+insert into Guest(guestno,guestname,guestaddress) values ('23','ABC','Newyork');
+insert into Guest(guestno,guestname,guestaddress) values ('24','ABC','London');
+insert into Guest(guestno,guestname,guestaddress) values ('25','ABC','Delhi');
+insert into Guest(guestno,guestname,guestaddress) values ('22','ABC','Mumbai');
+
+ Solve following queries by SQL 
+1. What is the total revenue per night from all double rooms? 
+select SUM(price)from Room where type1 = 'double';
+2. List the details of all rooms at the Grosvenor Hotel, including the name of the guest staying in the room, if the room is occupied. 
+SELECT r.* FROM Room r LEFT JOIN (SELECT g.guestname, h.hotelno, b.roomno FROM Guest g, Booking b, Hotel h WHERE g.guestno = b.guestno AND b.hotelno = h.hotelno AND name='Grosvenor' AND datefrom <= CURRENT_DATE AND dateto >= CURRENT_DATE) AS XXX ON r.hotelno = XXX.hotelno AND r.roomno = XXX.roomno;
+3. What is the average number of bookings for each hotel in April? 
+SELECT COUNT(DISTINCT guestNo) FROM BookingWHERE (datefrom <='2022-08-01' AND dateto>='2022-08-01') OR (datefrom >='2022-08-01' AND datefrom <= '2022-08-31');
+4. Create index on one of the field and show is performance in query. 
+CREATE INDEX showON Hotel (hotelno, name);
+5. List full details of all hotels. 
+select h.hotelno,h.name,h.city,r.type1,r.price from Hotel h, Room r ;
+6. List full details of all hotels in London. 
+SELECT * FROM Hotel WHERE city = 'London';
+7. Update the price of all rooms by 5%. 
+update Room set price = price + 5; 
+ select  * from Room;
+8. List the number of rooms in each hotel in London. 
+SELECT h.hotelno ,COUNT(roomNo) AS count FROM Room r, Hotel h WHERE r.hotelno = h.hotelno AND city = 'London' GROUP BY hotelno; 
+9. List all double or family rooms with a price below £40.00 per night, in ascending order of price
+SELECT * FROM Room WHERE price < '40' AND type1 IN ('double', 'family')
+ ORDER BY price;
+
+
+
+
+
+
+
+
+
+
+Q.5The following tables form part of a database held in a relational DBMS: 
+Hotel (HotelNo, Name, City) HotelNo is the primary key 
+Room (RoomNo, HotelNo, Type, Price) 
+Booking (HotelNo, GuestNo, DateFrom, DateTo, RoomNo) 
+Guest (GuestNo, GuestName, GuestAddress) 
+create table Hotel(hotelno varchar(20) primary key , name varchar(40), city varchar (40));
+create table Room(roomno varchar(20)primary key,hotelno varchar (20),type varchar(20),price varchar(20));
+create table Booking(hotelno varchar(20),guestno varchar(20),datefrom varchar(20),dateto varchar(20),roomno varchar(20));
+create table Guest(guestno varchar(20)primary key,guestname varchar(20),guestaddress varchar(50));
+
+insert into Hotel(hotelno,name,city)values ('01','Grosvenor','Newyork');
+insert into Hotel(hotelno,name,city)values ('02','Indigo','Delhi');
+insert into Hotel(hotelno,name,city)values ('03','Zen','London');
+insert into Hotel(hotelno,name,city)values ('04','Italia','Chikago');
+insert into Hotel(hotelno,name,city)values ('05','Bukhara','Los Angeles');
+
+insert into Room(roomno,hotelno,type1,price)values('11','01','double','12000');
+insert into Room(roomno,hotelno,type1,price)values('13','01','presedential suit','100000');
+insert into Room(roomno,hotelno,type1,price)values('14','03','deluxe','8000');
+insert into Room(roomno,hotelno,type1,price)values('15','04','studio','15000');
+insert into Room(roomno,hotelno,type1,price)values('16','05','family','14000');
+
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','22','2022/08/02','2022/08/03','11');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','23','2021/10/04','2021/10/05','13');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('03','24','2020/07/08','2020/07/09','14');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('05','25','2022/08/07','2022/08/08','16');
+
+insert into Guest(guestno,guestname,guestaddress) values ('23','ABC','Newyork');
+insert into Guest(guestno,guestname,guestaddress) values ('24','ABC','London');
+insert into Guest(guestno,guestname,guestaddress) values ('25','ABC','Delhi');
+insert into Guest(guestno,guestname,guestaddress) values ('22','ABC','Mumbai');
+
+Solve following queries by SQL 
+1. List full details of all hotels. 
+select h.hotelno,h.name,h.city,r.type1,r.price from Hotel h, Room r ;
+2. How many hotels are there?
+select count(name) from Hotel;
+3. List the price and type of all rooms at the Grosvenor Hotel.
+select type1 from Room;
+4. List the number of rooms in each hotel 
+
+5. List all guests currently staying at the Grosvenor Hotel. 
+
+6. List all double or family rooms with a price below £40.00 per night, in ascending order of price. 
+SELECT * FROM Room WHERE price < '40' AND type1 IN ('double', 'family')
+ ORDER BY price;
+7. How many different guests have made bookings for August? 
+select guestno from Booking where datefrom between '2022/08/01' and '2022/08/31';
+8. What is the total income from bookings for the Grosvenor Hotel today? 
+
+9. What is the most commonly booked room type for each hotel in London? 
+select MAX(type1) from Room where hotelno = '01';
+10. Update the price of all rooms by 5%.
+Update Room set price=price+5;
+
+
+
+
+
+
+
+
+
+
+Q.6 The following tables form part of a database held in a relational DBMS: 
+Hotel (HotelNo, Name, City)
+Room (RoomNo, HotelNo, Type, Price) 
+Booking (HotelNo, GuestNo, DateFrom, DateTo, RoomNo)
+Guest (GuestNo, GuestName, GuestAddress) 
+create table Hotel(hotelno varchar(20) primary key , name varchar(40), city varchar (40));
+create table Room(roomno varchar(20)primary key,hotelno varchar (20),type varchar(20),price varchar(20));
+create table Booking(hotelno varchar(20),guestno varchar(20),datefrom varchar(20),dateto varchar(20),roomno varchar(20));
+create table Guest(guestno varchar(20)primary key,guestname varchar(20),guestaddress varchar(50));
+
+insert into Hotel(hotelno,name,city)values ('01','Grosvenor','Newyork');
+insert into Hotel(hotelno,name,city)values ('02','Indigo','Delhi');
+insert into Hotel(hotelno,name,city)values ('03','Zen','London');
+insert into Hotel(hotelno,name,city)values ('04','Italia','Chikago');
+insert into Hotel(hotelno,name,city)values ('05','Bukhara','Los Angeles');
+
+insert into Room(roomno,hotelno,type1,price)values('11','01','double','12000');
+insert into Room(roomno,hotelno,type1,price)values('13','01','presedential suit','100000');
+insert into Room(roomno,hotelno,type1,price)values('14','03','deluxe','8000');
+insert into Room(roomno,hotelno,type1,price)values('15','04','studio','15000');
+insert into Room(roomno,hotelno,type1,price)values('16','05','family','14000');
+
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','22','2022/08/02','2022/08/03','11');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('01','23','2021/10/04','2021/10/05','13');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('03','24','2020/07/08','2020/07/09','14');
+insert into Booking (hotelno,guestno,datefrom,dateto,roomno)values('05','25','2022/08/07','2022/08/08','16');
+
+insert into Guest(guestno,guestname,guestaddress) values ('23','ABC','Newyork');
+insert into Guest(guestno,guestname,guestaddress) values ('24','ABC','London');
+insert into Guest(guestno,guestname,guestaddress) values ('25','ABC','Delhi');
+insert into Guest(guestno,guestname,guestaddress) values ('22','ABC','Mumbai');
+Solve following queries by SQL 
+1. List full details of all hotels. 
+select h.hotelno,h.name,h.city,r.type1,r.price from Hotel h, Room r ;
+2. List full details of all hotels in London. 
+SELECT * FROM Hotel WHERE city = 'London';
+3. List all guests currently staying at the Grosvenor Hotel. 
+select * from Booking where dateto >= '2022/11/11';
+4. List the names and addresses of all guests in London, alphabetically ordered by name. 
+select guestname , guestaddress from Guest where guestaddress = 'London' order by guestname;
+5. List the bookings for which no date_to has been specified. 
+select * from Booking where dateto = 'null';
+6. How many hotels are there? 
+select count(name) from Hotel;
+7. List the rooms that are currently unoccupied at the Grosvenor Hotel. 
+
+8. What is the lost income from unoccupied rooms at each hotel today? 
+
+9. Create index on one of the field and show is performance in query. 
+CREATE INDEX showON Hotel (hotelno, name);
+10. Create one view on above database and query it
+CREATE VIEW hotel_view ASSELECT name, cityFROM  Hotel;
+UPDATE hotel_view SET name = 'India meal' WHERE name = 'Indigo';    (query on view)
+select * from hotel_view;
+
+
+
+
+
+
+
+
+
+
+
+7. Consider the following database
+Project(project_id,proj_name,chief_arch) , project_id is primary key
+Employee(Emp_id,Emp_name) , Emp_id is primary key
+Assigned-To(Project_id,Emp_id)
+create table Project(project_id varchar(10),proj_name varchar(20),chief_arch varchar(20));
+
+create table Employee(Emp_id int,Emp_name varchar(20));
+
+alter table Project add primary key(project_id);
+
+alter table Emp add primary key(Emp_id);
+
+create table Assigned_To(project_id varchar(5),Emp_id int);
+
+//create table Assigned_To(project_id int, foreign key(project_id) references Project(project_id), Emp_id int , foreign key (Emp_id) references Employee(Emp_id) );
+
+insert into Project Values('C353','Database','MYSQL'),('C354','JAVA','Ecplise'),('C453','PYTHON','Pycharm');
+
+insert into Employee Values(123,'Swapnil'),(124,'Akshay'),(125,'Ritul');
+
+insert into Assigned_To values('C353',123),('C353',124),('C354',125);
+
+1.Get the details of employees working on project C353
+select emp_id from Assigned_To where projectid = 'C353';
+
+2. Get employee number of employees working on project C353
+select A.emp_id, emp_name from Assigned_To A , Employee where project_id = 'C353' ;
+//select count(*) from Assigned_To  , Employee where project_id = 'C353' ;
+
+3. Obtain details of employees working on Database project
+select Emp_name, A. Emp_id from A. Assigned_To A, Employee where project_id in (select P.project_id from P. project where P. proj_name = 'Database');
+
+4. Get details of employees working on both C353 and C354
+select Emp_name, A.emp_id from Assigned_to A, Employee where A.Project_id = 'C354' union select Emp_name, A.emp_id from Assigned_to A, Employee where A.Project_id = 'C353';
+
+5. Get employee numbers of employees who do not work on project C453
+
+
+
+
+
+
+
+
+
+
+8. Consider the following database
+Employee(emp_no,name,skill,pay-rate) eno primary key
+Position(posting_no,skill) posting_no primary key
+Duty_allocation(posting_no,emp_no,day,shift)
+Find the SQL queries for the following:
+
+create table Employee(emp_no int, primary key(emp_no),name text,skill text,pay_rate int);
+
+create table Positions(posting_no int, primary key(posting_no),skill text);
+
+create table Duty_allocation(posting_no int ,foreign key(posting_no) references Positions(posting_no),emp_no int ,foreign key(emp_no) references Employee(emp_no),day date,shift text);
+
+1. Get the duty allocation details for emp_no 123461 for the month of April 1986.
+select posting_no., shift, day
+from Duty_allocation
+where emp_no = 123461 and
+Day ≥ 1986-04-01 and Day ≤ 1986-04-30 ;
+
+2. Find the shift details for Employee ‘xyz’
+select posting_no., shift, day
+from Duty_allocation, Employee
+where Duty allocation.emp_no. = Employee.emp_no and
+Name = 'XYZ';
+
+3. Get employees whose rate of pay is more than or equal to the rate of pay of employee ‘xyz’
+select S.name, S.pay_rate from Employee as S, Employee as T where S.pay_rate > T.pay_rate and T.name = 'XYZ';
+
+4. Get the names and pay rates of employees with emp_no less than 123460 whose rate of pay is more than the rate of pay of at least one employee with emp_no greater than or equal to 123460.
+Select name, pay_rate  from Employee where emp_no < 123460 and pay_rate > some (select pay_rate from Employee where emp_no ≥ 123460);
+
+5. Find the names of employees who are assigned to all positions that require a Chef’s skill
+select S.Name from Employee S where (select posting_no from Duty_allocation D where S.emp_no = D.emp_no) contains (select P.posting_no from position P where P.skill = 'Chef');
+
+6 .Find the employees with the lowest pay rate
+select emp_no, Name, Pay_rate from Employee where pay_rate ≤ all (select pay_rate from Employee)
+
+7 .Get the employee numbers of all employees working on at least two dates.
+select emp_no from Duty_allocation group by emp_no having (count;*) > 1
+
+8 .Get a list of names of employees with the skill of Chef who are assigned a duty
+select Name from Employee where emp_no in ((select emp_no from Employee where skill = 'Chef') intersect (select emp_no from Duty_allocation));
+
+9 .Get a list of employees not assigned a duty
+(select emp_no from Employee) minus (select emp_no from Duty_allocation)
+
+10.Get a count of different employees on each shift
+select shift, count (distinct emp_no) from Duty_allocation group by shift;
+
+
+
+
+
+
+
+
+
+
+
+9. Create the following tables. And Solve following queries by SQL 
+• Deposit (actno,cname,bname,amount,adate) 
+• Branch (bname,city) 
+• Customers (cname, city) 
+• Borrow(loanno,cname,bname, amount) Add primary key and foreign key wherever applicable. Insert data into the above created tables.
+
+create table deposit (actno varchar(5) ,cname varchar(18) , bname varchar(18) , amount int ,adate date); 
+
+create table branch(bname varchar(18),city varchar(18)); 
+
+create table customers(cname varchar(19) ,city varchar(18)); 
+
+create table borrow(loanno varchar(5), cname varchar(18), bname varchar(18), amount int);
+
+deposit: 
+insert into deposit values('100',’anil’,'vrce',1000,'1995-03-01');
+ insert into deposit values('101','sunil','ajni',5000,'1996-01-04'); 
+insert into deposit values('102','mehul','karolbagh',3500,'1995-11-17'); 
+insert into deposit values('104','madhuri','chandi',1200,'1995-12-17'); 
+insert into deposit values('105','prmod','m.g.road',3000,'1996-03-27'); 
+insert into deposit values('106','sandip','andheri',2000,'1996-03-31'); 
+insert into deposit values('107','shivani','virar',1000,'1995-07-05');
+insert into deposit values('108','kranti','nehruplace',5000,'1996-06-02'); 
+insert into deposit values('109','minu','powai',7000,'1997-12-02');
+
+branch:
+insert into branch values('vrce','nagpur');
+insert into branch values('ajni','nagpur'); 
+insert into branch values('karolbagh','delhi'); 
+insert into branch values('chandi','delhi'); 
+insert into branch values('dharampeth','nagpur'); 
+insert into branch values('m.g.road','banglore'); 
+insert into branch values('andheri','bombay'); 
+insert into branch values('vihar','bombay'); 
+insert into branch values('nehru place','delhi'); 
+insert into branch values('powai','bombay');
+
+customer:
+insert into customers values ('anil','calcutta'); 
+insert into customers values ('sunil','delhi');
+insert into customers values ('mehul','baroda'); 
+insert into customers values ('mandar','patna');
+insert into customers values ('madhuri','nagpur'); 
+insert into customers values ('pramod','nagpur');
+insert into customers values ('sandip','surat');
+insert into customers values ('shivani','bombay'); 
+insert into customers values ('kranti','bombay'); 
+insert into customers values ('naren','bombay');
+
+borrow:
+insert into borrow values ('201','anil','vrce',1000); 
+insert into borrow values ('206','mehul','vrce',5000); 
+insert into borrow values ('311','sunil','dharampeth',3000); 
+insert into borrow values ('321','madhuri','andheri',2000); 
+insert into borrow values ('375','prmod','vihar',8000); 
+insert into borrow values ('481','kranti','nehru place',3000);
+
+1. Display names of depositors having amount greater than 4000.
+SELECT CNAME FROM DEPOSIT WHERE AMOUNT >4000;
+
+2. Display account date of customers Anil 
+Select adate from Deposit where cname=’Anil’;
+
+3. Display account no. and deposit amount of customers having account opened between dates 1-12-96 and 1-5-97 
+SELECT act_no, AMOUNT FROM DEPOSIT WHERE ADATE BETWEEN ‘1996-12-01’ AND ’1997-05-01’;
+
+4. Find the average account balance at the Perryridge branch. 
+select avg (balance) from account where branch-name = “Perryridge”
+5. Find the names of all branches where the average account balance is more than $1,200. 
+select branch-name, avg-balance from (select branch-name, avg (balance) from account group by branch-name) as result (branch-name, avg-balance) where avg-balance > 1200
+
+6. Delete depositors having deposit less than 5000 
+Delete from deposit where amount <5000;
+
+7. Create a view on deposit table.
+create View deposit_view as select actno,cname,bname,amount,adate from deposit;
+select * from deposit_view;
+
+
+
+
+
+
+
+
+
+10. Create the following tables. And Solve following queries by SQL 
+1. Deposit (actno,cname,bname,amount,adate) 
+2. Branch (bname,city) 
+3. Customers (cname, city) 
+4. Borrow(loanno,cname,bname, amount) 
+Add primary key and foreign key wherever applicable. 
+Insert data into the above created tables.
+Use Question 9 Structure 
+a.	Display names of all branches located in city Bombay. 
+Select * from Branch where city=’Bombay’
+
+b.	Display account no. and amount of depositors. 
+Select actno, amount from deposit
+
+c.	Update the city of customers Anil from Pune to Mumbai 
+Update Customers set city=’Mumbai’ where city=’Pune’
+
+d.	Find the number of depositors in the bank 
+select count (distinct cname) from deposit
+
+e.	Calculate Min,Max amount of customers. 
+
+f.	Create an index on deposit table
+create index deposit_index on deposit(actno);
+
+g. Create View on Borrow table.
+Create view borrow_view as select bname,city from borrow;
+Select * from borrow_view;
+
+
+
+
+
+
+
+
+11. Create the following tables. Solve queries by SQL 
+• Deposit (actno,cname,bname,amount,adate) 
+• Branch (bname,city) 
+• Customers (cname, city) 
+• Borrow(loanno,cname,bname, amount) 
+Add primary key and foreign key wherever applicable. Insert data into the above created tables. 
+Use Question 9 structure 
+a.	Display account date of customers Anil. 
+Select adate form deposit where cname=’Anil’;
+b. Modify the size of attribute of amount in deposit
+
+c. Display names of customers living in city pune.
+Select cname form customers where city=’Pune’
+
+d. Display name of the city where branch KAROLBAGH is located.
+Select city from branch where bname=’KAROLBAGH’
+
+e. Find the number of tuples in the customer relation 
+select count (*) from customer
+
+f. Delete all the record of customers Sunil 
+delete * from customer where cname=’Sunil’
+
+g. Create a view on deposit table
+create View deposit_view as select actno,cname,bname,amount,adate from deposit;
+select * from deposit_view;
+
+
+
+
+
+
+
+
+
+
+12. Create the following tables. Solve queries by SQL 
+• Deposit (actno,cname,bname,amount,adate) 
+• Branch (bname,city) 
+• Customers (cname, city) 
+• Borrow(loanno,cname,bname, amount) 
+Add primary key and foreign key wherever applicable. Insert data into the above created tables. Solve following queries by SQL 
+Use question 9 Structure
+1.	Display customer name having living city Bombay and branch city Nagpur 
+select c.city from customer c, branch b where c.city=’bombay’ and b.city=’nagpur’ ;
+
+2.	Display customer name having same living city as their branch city 
+select c.city from customer c, branch b where c.city=b.city ;
+
+3.	Display customer name who are borrowers as well as depositors and having living city Nagpur. 
+Select cname form deposit d , borrow b, customers c where d.cname=b.name, d.cname=c.cname and c.city=’Nagpur’ 
+
+4.	Display borrower names having deposit amount greater than 1000 and loan amount greater than 2000 
+select br1.cname, br1.amount, d1.cname, d1.amount from borrow br1,deposit d1 where d1.cname = br1.cname and d1.amount > 1000 and br1.amount >2000;
+
+5.	Display customer name living in the city where branch of depositor sunil is located. 
+select c.cname from customer c where c.city in (select b.city from 
+branch b where b.bname in (select d.bname from deposit d where d.cname='sunil'));
+
+6.	Create an index on deposit table
+create index deposit_index on deposit(actno);
+
+
+
+
+
+
+
+
+
+
+
+13) Create the following tables. 
+1)PUBLISHER( PID , PNAME ,ADDRESS ,STATE ,PHONE ,EMAILID ); 
+2)BOOK( ISBN ,BOOK_TITLE , CATEGORY , PRICE , COPYRIGHT_DATE , YEAR ,PAGE_COUNT ,PID ); 
+3) AUTHOR(AID,ANAME,STATE,CITY ,ZIP,PHONE,URL ) 
+4) AUTHOR_BOOK(AID,ISBN); 
+5) REVIEW(RID,ISBN,RATING);
+Solve following queries by SQL 
+
+create table publisher(pid int, pname varchar(50), address varchar(50), state varchar(50), phone varchar(50), emailid varchar(50));
+
+create table book(isbn varchar(50),book_title varchar(50), category varchar(50), price int, copyright_date int , year int,page_count int ,pid int );
+
+create table author(aid int,aname varchar(50),state varchar(50),city varchar(50),zip int,phone varchar(50),url varchar(50));
+
+create table author_book(aid int,isbn varchar(50));
+
+create table review(rid int,isbn varchar(50),rating int);
+
+Publisher
+insert into publisher values(1, 'sunrise', 'mumbai', 'maharashtra', '9098765432', 'sunrise12@gmail.com');
+insert into publisher values (2, 'mehta','pune', 'maharashtra', '9128765432', 'addison 12@gmail.com');
+insert into publisher values (3,'morgan kaufmann', 'korth', 'maharashtra', '9548765432', 'morgan12@gmail.com');
+
+Book:
+insert into book values ('0321228383', 'database systems', 'a', 255, 12, 2007, 86, 1);
+insert into book values ('0321228384', 'computer science', 'b', 205, 12, 2007, 80, 2);
+insert into book values ('0321228385', 'out of their minds', 'c', 145, 12, 2007, 70, 3);
+
+
+Author
+insert into author values (10, 'chetan bhagat', 'maharashtra', 'mumbai', 401205, '9098765432', 'www.k10.com');
+insert into author values (20, 'lewis', 'maharashtra', 'pune',410501, '9128765432', 'www.lewis20.com');
+insert into author values (30, 'bernstein', 'maharashtra', 'korth', 402501, '9548765432', 'www.bern30.com');
+
+Author_book
+insert into author_book values (10,'0321228383');
+insert into author_book values (20,'0321228384');
+insert into author_book values (30,'0321228385');
+
+Review
+insert into review values(201, '0321228383', 4);
+insert into review values(202, '0321228384', 3);
+insert into review values(203, '0321228385', 4);
+
+
+1.	Retrieve city, phone, url of author whose name is ‘CHETAN BHAGAT’. 
+select city,phone,url from author where aname='Chetan Bhagat';
+
+2.	Retrieve book title, reviewable id and rating of all books.
+select book_title,rid,rating from review r,book b where b.isbn=r.isbn;
+
+3.	Retrieve book title, price, author name and url for publishers ‘MEHTA’.
+select book_title,price,aname,url from book b,author a,publisher p where b.pid=p.pid and p.pname = 'MEHTA'; 
+4. In a PUBLISHER relation change the phone number of ‘MEHTA’ to 123456 
+update publisher set phone='123456' where pname='mehta';
+5. Calculate and display the average, maximum, minimum price of each publisher. 
+select avg(price),min(price),max(price) from book, publisher where book.pid=publisher.pid;
+6. Delete details of all books having a page count less than 100. 
+delete from book where page_count < 100;
+7. Retrieve details of all authors residing in city Pune and whose name begins with character ‘C’. 
+select * from author where city='Pune' and aname like 'C%';
+8. Retrieve details of authors residing in same city as ‘Korth’. 
+select * from author where city='Korth';
+9. Create a procedure to update the value of page count of a book of given ISBN. 
+create procedure a(in isbn int, in page_count int)
+    -> begin
+    -> update book
+    -> set book.page_count = page_count
+    -> where book.isbn = isbn;
+    -> end $
+10. Create a function that returns the price of book with a given ISBN.
+    delimiter $
+    create function pbook(isbn2 int )
+    returns int
+    deterministic
+    begin
+    declare isbn3 int;
+    declare price2 int;
+    select isbn into isbn3 from book where isbn2=isbn;
+    select price into price2 where isbn=isbn2;
+    return price2;
+    end;
+    $

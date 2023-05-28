@@ -1,0 +1,122 @@
+WRITE A DATABASE TRIGGER ON LIBRARY TABLE THE SYSTEM SHOULD KEEP TRACK OF THE RECORDS THAT
+ARE BEIGN UPDATED OR DELETED THE OLD VALUE OF UDATED RECORDS./
+
+
+mysql> CREATE TABLE LIB_AUDIT(RNO INT,
+-> B_TITLE VARCHAR(20),
+-> ACTION VARCHAR(20));^C
+mysql> CREATE TABLE BOOKS(RNO INT,
+-> B_TITLE VARCHAR(20));
+Query OK, 0 rows affected (0.04 sec)
+mysql>
+mysql> CREATE TABLE LIB_AUDIT(RNO INT,
+-> B_TITLE VARCHAR(20),
+-> ACTION VARCHAR(20));
+Query OK, 0 rows affected (0.03 sec)
+mysql> DESC LIB_AUDIT;
++---------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RNO | int | YES | | NULL | |
+| B_TITLE | varchar(20) | YES | | NULL | |
+| ACTION | varchar(20) | YES | | NULL | |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> DESC BOOKS;
++---------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| RNO | int | YES | | NULL | |
+| B_TITLE | varchar(20) | YES | | NULL | |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+mysql> INSERT INTO BOOKS VALUES(1, 'ABC');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO BOOKS VALUES(2, 'DEF');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO BOOKS VALUES(3, 'GHI');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO BOOKS VALUES(4, 'JKL');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO BOOKS VALUES(5, 'MNO');
+Query OK, 1 row affected (0.01 sec)
+mysql> SELECT *FROM BOOKS;
++------+---------+
+| RNO | B_TITLE |
++------+---------+
+| 1 | ABC |
+| 2 | DEF |
+| 3 | GHI |
+| 4 | JKL |
+| 5 | MNO |
++------+---------+
+5 rows in set (0.00 sec)
+mysql> SELECT *FROM LIB_AUDIT;
+Empty set (0.00 sec)
+mysql> DELIMITER $
+mysql> CREATE TRIGGER before_book_delete
+-> AFTER DELETE
+-> ON books
+-> FOR EACH ROW
+-> BEGIN
+-> INSERT INTO LIB_AUDIT
+-> SET action ='DELETE',
+-> RNO=OLD.RNO,
+-> B_TITLE=OLD.B_TITLE;
+-> END;
+-> $
+Query OK, 0 rows affected (0.01 sec)
+mysql> DELIMITER ;
+mysql> DELETE FROM BOOKS WHERE RNO = 1;
+Query OK, 1 row affected (0.01 sec)
+mysql> SELECT *FROM BOOKS;
++------+---------+
+| RNO | B_TITLE |
++------+---------+
+| 2 | DEF |
+| 3 | GHI |
+| 4 | JKL |
+| 5 | MNO |
++------+---------+
+4 rows in set (0.00 sec)
+mysql> SELECT *FROM LIB_AUDIT;
++------+---------+--------+
+| RNO | B_TITLE | ACTION |
++------+---------+--------+
+| 1 | ABC | DELETE |
++------+---------+--------+
+1 row in set (0.00 sec)
+mysql> DELIMITER $
+mysql> CREATE TRIGGER before_book_update
+-> BEFORE UPDATE
+-> ON BOOKS
+-> FOR EACH ROW
+-> BEGIN
+-> INSERT INTO LIB_AUDIT
+-> SET action ='UPDATE',
+-> RNO=NEW.RNO,
+-> B_TITLE=NEW.B_TITLE;
+-> END;
+-> $
+Query OK, 0 rows affected (0.02 sec)
+mysql> DELIMITER ;
+mysql> UPDATE BOOKS SET B_TITLE = 'XYZ' WHERE RNO = 2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1 Changed: 1 Warnings: 0
+mysql> SELECT* FROM BOOKS;
++------+---------+
+| RNO | B_TITLE |
++------+---------+
+| 2 | XYZ |
+| 3 | GHI |
+| 4 | JKL |
+| 5 | MNO |
++------+---------+
+4 rows in set (0.00 sec)
+mysql> SELECT* FROM LIB_AUDIT;
++------+---------+--------+
+| RNO | B_TITLE | ACTION |
++------+---------+--------+
+| 1 | ABC | DELETE |
+| 2 | XYZ | UPDATE |
++------+---------+--------

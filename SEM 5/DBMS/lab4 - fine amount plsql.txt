@@ -1,0 +1,87 @@
+write pl/sql block of code to calculate for a library book by aaccesing borrower info;
+exception handling is mendatory
+fine amount
+
+
+
+
+
+
+
+
+
+
+mysql> CREATE TABLE BORROW(
+-> ROLL_NO INTEGER PRIMARY KEY,
+-> NAME VARCHAR(50),
+-> DATEOFISSUE DATE,
+-> NAMEOFBOOK VARCHAR(50),
+-> STATUS VARCHAR(50));
+Query OK, 0 rows affected (0.04 sec)
+mysql> CREATE TABLE FINE(
+-> ROLL_NO INTEGER PRIMARY KEY,
+-> DATEOFRETURN DATE,
+-> AMT INTEGER);
+Query OK, 0 rows affected (0.03 sec)
+mysql> INSERT INTO BORROW VALUES(1, 'A', '2022-08-15', 'JAVA', 'I');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO BORROW VALUES(2, 'B', '2022-08-05', 'CNS', 'I');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO BORROW VALUES(3, 'C', '2022-08-01', 'DBMS', 'I');
+Query OK, 1 row affected (0.00 sec)
+mysql> INSERT INTO BORROW VALUES(4, 'D', '2022-09-01', 'SPOS', 'I');
+Query OK, 1 row affected (0.00 sec)
+mysql> DELIMITER $
+mysql> CREATE PROCEDURE FINE_CALCULATION(IN RNO INT, BOOKNAME VARCHAR(20))
+-> BEGIN
+-> DECLARE ISSUEDATE DATE;
+-> DECLARE DIFF INT;
+-> DECLARE FINE_AMT INT;
+-> DECLARE EXIT HANDLER FOR SQLEXCEPTION SELECT 'TABLE NOT FOUND';
+-> SELECT DATEOFISSUE INTO ISSUEDATE FROM BORROW WHERE ROLL_NO=RNO AND
+NAMEOFBOOK=BOOKNAME;
+-> SELECT DATEDIFF(CURDATE(), ISSUEDATE) INTO DIFF;
+-> IF(DIFF>15 AND DIFF<30) THEN
+-> SET FINE_AMT = DIFF*5;
+-> INSERT INTO FINE VALUES(RNO, CURDATE(), FINE_AMT);
+-> ELSEIF(DIFF>30) THEN
+-> SET FINE_AMT = DIFF*50;
+-> INSERT INTO FINE VALUES(RNO, CURDATE(), FINE_AMT);
+-> ELSEIF(DIFF<15) THEN
+-> SET FINE_AMT = 0;
+-> INSERT INTO FINE VALUES(RNO, CURDATE(), FINE_AMT);
+-> END IF;
+-> UPDATE BORROW SET STATUS = 'R' WHERE ROLL_NO=RNO AND
+NAMEOFBOOK=BOOKNAME;
+-> END;
+-> $
+Query OK, 0 rows affected (0.02 sec)
+mysql> DELIMITER ;
+mysql> CALL FINE_CALCULATION(3, 'DBMS');
+Query OK, 1 row affected (0.02 sec)
+mysql> CALL FINE_CALCULATION(4, 'SPOS');
+Query OK, 1 row affected (0.01 sec)
+mysql> CALL FINE_CALCULATION(2, 'CNS');
+Query OK, 1 row affected (0.01 sec)
+mysql> CALL FINE_CALCULATION(1, 'JAVA');
+Query OK, 1 row affected (0.01 sec)
+mysql> SELECT *FROM FINE;
++---------+--------------+------+
+| ROLL_NO | DATEOFRETURN | AMT |
++---------+--------------+------+
+| 1 | 2022-09-10 | 130 |
+| 2 | 2022-09-10 | 1800 |
+| 3 | 2022-09-10 | 2000 |
+| 4 | 2022-09-10 | 0 |
++---------+--------------+------+
+4 rows in set (0.00 sec)
+mysql> SELECT *FROM BORROW;
++---------+------+-------------+------------+--------+
+| ROLL_NO | NAME | DATEOFISSUE | NAMEOFBOOK | STATUS |
++---------+------+-------------+------------+--------+
+| 1 | A | 2022-08-15 | JAVA | R |
+| 2 | B | 2022-08-05 | CNS | R |
+| 3 | C | 2022-08-01 | DBMS | R |
+| 4 | D | 2022-09-01 | SPOS | R |
++---------+------+-------------+------------+--------+
+4 rows in set (0.00 sec)
